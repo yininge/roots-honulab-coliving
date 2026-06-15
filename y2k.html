@@ -196,6 +196,18 @@
   .spk.p1{top:15%;left:7%;color:#ff5fa2;font-size:15px;}
   .spk.p2{top:33%;right:9%;color:#F2E930;font-size:12px;animation-delay:.5s;}
   .spk.p3{bottom:26%;left:10%;color:#fff;font-size:13px;animation-delay:1s;}
+
+  /* ===== mobile fixes ===== */
+  @media(max-width:600px){
+    .hosts{flex-direction:column;gap:10px;}
+    .hero{padding:38px 22px 30px;}
+    .hero::before{display:none;}
+    h1{font-size:34px;}
+    .hero-cat{position:static;display:block;margin:18px auto 2px;width:132px;right:auto;bottom:auto;}
+    .seats{color:var(--ink);text-shadow:none;}
+    .seats b{color:var(--g2);}
+    .sec h2{font-size:25px;}
+  }
 </style>
 </head>
 <body>

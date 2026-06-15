@@ -153,6 +153,18 @@
   .signoff .eng{font-weight:500;color:var(--ink-soft);}
   .honu-egg{display:block;width:60px;margin:14px auto 0;animation:swim 5s ease-in-out infinite;}
   @keyframes swim{0%,100%{transform:translateX(-8px) rotate(-3deg);}50%{transform:translateX(8px) rotate(3deg);}}
+
+  /* ===== mobile fixes ===== */
+  @media(max-width:600px){
+    .hosts{flex-direction:column;gap:10px;}
+    .hero{padding:38px 22px 30px;}
+    .hero::before{display:none;}
+    h1{font-size:34px;}
+    .hero-cat{position:static;display:block;margin:18px auto 2px;width:132px;right:auto;bottom:auto;}
+    .seats{color:var(--ink);text-shadow:none;}
+    .seats b{color:var(--g2);}
+    .sec h2{font-size:25px;}
+  }
 </style>
 </head>
 <body>
