@@ -54,11 +54,11 @@
 
   /* hero */
   .hero{
-    background:var(--card);border-radius:34px;padding:46px 40px 40px;text-align:center;position:relative;
+    background:var(--card);border-radius:34px;padding:46px 40px 68px;text-align:center;position:relative;
     box-shadow:0 26px 60px rgba(35,110,90,.20);overflow:hidden;
     border:3px solid #fff;
   }
-  .hero::before{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;
+  .hero::before{content:"";position:absolute;left:0;right:0;bottom:0;height:60px;
     background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120'><path d='M0 70 Q60 30 130 60 T270 55 T400 70 V120 H0Z' fill='%2361BC93'/><path d='M0 92 Q80 58 170 82 T340 78 T400 90 V120 H0Z' fill='%232C9D72'/></svg>") bottom/cover no-repeat;opacity:.95;}
   .tag{display:inline-flex;align-items:center;gap:8px;background:var(--y);color:#3c4a00;font-weight:700;
        padding:8px 18px;border-radius:50px;font-size:15px;letter-spacing:.5px;box-shadow:0 4px 0 #cdc41f;}
@@ -92,7 +92,8 @@
   .intro-card .em{background:linear-gradient(180deg,transparent 62%,var(--y-soft) 62%);font-weight:700;}
 
   /* schedule */
-  .days{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+  .days{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+  @media(max-width:600px){.days{grid-template-columns:1fr;}}
   .day{background:var(--card);border-radius:24px;padding:22px 22px 24px;box-shadow:0 14px 34px rgba(35,110,90,.13);
        border:3px solid #fff;position:relative;overflow:hidden;}
   .day .corner{position:absolute;top:-6px;right:-6px;width:62px;opacity:.9;}
@@ -104,6 +105,9 @@
   .day li .tm{font-family:"Fredoka";font-weight:600;color:var(--g2);min-width:50px;font-size:16px;}
   .day li.star .tm{color:var(--honu-y);}
   .day li.star{font-weight:700;}
+  .flex-day{margin:24px auto 0;max-width:580px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;
+    text-align:center;background:#fffbe6;border:2.5px dashed var(--g1);border-radius:20px;padding:15px 26px;font-size:18px;color:var(--g-deep);}
+  .flex-day b{color:var(--g2);font-weight:900;}
 
   /* price */
   .price{background:linear-gradient(155deg,var(--g2),var(--g-deep));color:#fff;border-radius:28px;padding:34px 36px;
@@ -287,7 +291,7 @@
       <ul><li><span class="tm eng">08:00</span>穗眠民宿早餐</li><li><span class="tm eng">09:00</span>騎車</li><li><span class="tm eng">11:00</span>池上三件套</li><li><span class="tm eng">12:00</span>行程結束</li></ul>
     </div>
   </div>
-  <p style="text-align:center;color:var(--ink-soft);font-size:16px;margin-top:14px;">9/13（日）彈性自由行程，想多留一天的人可以一起 ☀️</p>
+  <div class="flex-day">☀️ <b>9/13（日）彈性自由行程</b> — 想多留一天的人，可以一起 🚲</div>
 
   <!-- 費用 -->
   <div class="sec"><svg class="ic" viewBox="0 0 100 100"><use href="#sun"/></svg><h2>費用</h2><span class="ln"></span></div>
