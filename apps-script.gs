@@ -13,7 +13,7 @@
  * A. 建立 Sheet
  *    1. 新建 Google Sheet「池上共居祭報名」，把第一個分頁改名為「報名」。
  *    2. 第一列填好表頭（順序對齊下方 appendRow）：
- *       時間 | 姓名 | Email | 聯絡方式 | 性別 | 方案 | 同住夥伴 | 背景 | 動機 | 期待偏好 | 簡聊時段 | 拍攝同意 | 來源頁 | 驗證分數
+ *       時間 | 姓名 | Email | 聯絡方式 | 方案 | 同住夥伴 | 背景 | 動機 | 期待偏好 | 簡聊時段 | 拍攝同意 | 來源頁 | 驗證分數
  *
  * B. 申請 reCAPTCHA v3 金鑰
  *    1. 到 https://www.google.com/recaptcha/admin/create
@@ -72,7 +72,7 @@ function doPost(e) {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('報名');
     sheet.appendRow([
       new Date(),
-      c(d.name), c(d.email), c(d.contact), c(d.gender), c(d.plan),
+      c(d.name), c(d.email), c(d.contact), c(d.plan),
       c(d.partner), c(d.background), c(d.motivation), c(d.expectation),
       c(d.calltime), d.photo ? '是' : '否', c(d.source), score
     ]);
