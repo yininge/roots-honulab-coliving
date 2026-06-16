@@ -39,6 +39,16 @@
   .star-bg.a{top:12%;right:12%;width:34px;}
   .star-bg.b{top:38%;left:6%;width:22px;animation-delay:.6s;}
   .star-bg.c{top:72%;right:8%;width:28px;animation-delay:1.1s;}
+  .star-bg.d{top:56%;left:9%;width:27px;animation-delay:.9s;}
+  .star-bg.e{top:21%;right:19%;width:23px;animation-delay:1.5s;}
+  .c4{width:130px;top:33%;right:5%;opacity:.5;animation:drift 28s linear infinite;}
+  .tdot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--y);box-shadow:0 0 7px var(--y);animation:tw 2.5s ease-in-out infinite;}
+  .tdot.t1{top:17%;left:15%;background:var(--g1);box-shadow:0 0 7px var(--g1);}
+  .tdot.t2{top:46%;right:13%;animation-delay:.8s;}
+  .tdot.t3{top:67%;left:21%;background:#8fd3da;box-shadow:0 0 7px #8fd3da;animation-delay:.5s;}
+  .tdot.t4{bottom:28%;right:24%;animation-delay:1.2s;}
+  .tdot.t5{top:9%;right:32%;width:6px;height:6px;animation-delay:.3s;}
+  .bike-deco{position:absolute;width:92px;bottom:9%;left:6%;opacity:.45;animation:bob 4.5s ease-in-out infinite;}
   @keyframes tw{0%,100%{transform:scale(.85) rotate(0);opacity:.7;}50%{transform:scale(1.1) rotate(20deg);opacity:1;}}
 
   /* host lockup */
@@ -108,6 +118,28 @@
   .flex-day{margin:24px auto 0;max-width:580px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;
     text-align:center;background:#fffbe6;border:2.5px dashed var(--g1);border-radius:20px;padding:15px 26px;font-size:18px;color:var(--g-deep);}
   .flex-day b{color:var(--g2);font-weight:900;}
+  /* 景點可點 + 彈窗 */
+  .spot{font:inherit;color:var(--g2);background:none;border:0;padding:0 1px;cursor:pointer;font-weight:700;border-bottom:1.5px dashed var(--g1);}
+  .spot:hover{color:var(--g-deep);border-bottom-color:var(--g2);}
+  .modal{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(8,40,30,.6);}
+  .modal.open{display:flex;}
+  .modal-card{background:#fff;border-radius:24px;max-width:440px;width:100%;padding:30px 28px 26px;position:relative;box-shadow:0 30px 70px rgba(8,40,30,.45);border:3px solid #fff;max-height:84vh;overflow:auto;}
+  .modal-tag{display:inline-block;font-size:13px;color:#3c4a00;background:var(--y);padding:5px 13px;border-radius:50px;margin-bottom:12px;font-weight:700;}
+  .modal-card h3{margin:0 0 12px;font-size:25px;color:var(--g-deep);font-weight:900;padding-right:26px;}
+  .modal-card p{margin:0 0 18px;font-size:17px;line-height:1.95;color:var(--ink);}
+  .modal-link{display:inline-flex;align-items:center;gap:8px;background:var(--g2);color:#fff;text-decoration:none;font-weight:700;padding:11px 22px;border-radius:50px;font-size:16px;box-shadow:0 6px 0 var(--g-deep);margin:0 8px 10px 0;}
+  .modal-ig{background:#fff;color:var(--g2);border:2px solid var(--g2);box-shadow:none;}
+  .modal-close{position:absolute;top:14px;right:15px;width:36px;height:36px;border:0;border-radius:50%;background:var(--cream);color:var(--g-deep);font-size:18px;cursor:pointer;line-height:1;}
+  .modal-close:hover{background:#e6dfc8;}
+  .info-card{background:var(--card);border-radius:26px;padding:28px 32px;box-shadow:0 16px 40px rgba(35,110,90,.12);border:3px solid #fff;}
+  .info-card h4{margin:20px 0 8px;font-size:20px;color:var(--g-deep);font-weight:900;}
+  .info-card h4:first-child{margin-top:0;}
+  .info-card p{margin:0 0 8px;font-size:17px;line-height:1.9;color:var(--ink);}
+  .info-card p b{color:var(--g2);}
+  .info-card .ext{color:var(--g2);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--g1);}
+  .suit{list-style:none;margin:0;padding:0;}
+  .suit li{position:relative;padding-left:30px;font-size:18px;line-height:1.9;margin-bottom:6px;color:var(--ink);}
+  .suit li::before{content:"✓";position:absolute;left:3px;color:var(--g2);font-weight:900;}
 
   /* price */
   .price{background:linear-gradient(155deg,var(--g2),var(--g-deep));color:#fff;border-radius:28px;padding:34px 36px;
@@ -200,13 +232,15 @@
   /* ===== mobile fixes ===== */
   @media(max-width:600px){
     .hosts{flex-direction:column;gap:10px;}
-    .hero{padding:38px 22px 30px;}
-    .hero::before{display:none;}
+    .hero{padding:38px 22px 14px;}
+    .hero::before{display:block;height:78px;}
     h1{font-size:30px;letter-spacing:0;}
-    .hero-cat{position:static;display:block;margin:18px auto 2px;width:132px;right:auto;bottom:auto;}
+    .hero-cat{position:static;display:block;margin:16px auto 0;width:128px;right:auto;bottom:auto;}
     .seats{color:var(--ink);text-shadow:none;font-size:16px;}
     .seats b{color:var(--g2);}
     .sec h2{font-size:25px;}
+    .dot{display:none;}
+    .meta-sub{display:block;margin-top:2px;}
   }
 </style>
 </head>
@@ -221,6 +255,24 @@
     <path d="M50 12 C28 30 26 62 47 86 C70 64 73 32 50 12 Z" fill="#61BC93" stroke="#2C9D72" stroke-width="3.5" stroke-linejoin="round"/>
     <path d="M48 84 Q49 50 50 16" stroke="#2C9D72" stroke-width="3" fill="none" stroke-linecap="round"/>
     <path d="M49 42 L62 34 M49 58 L61 52 M49 70 L59 66" stroke="#2C9D72" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="rice" viewBox="0 0 100 100">
+    <path d="M52 94 Q50 60 56 20" stroke="#2C9D72" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <g fill="#F2E930" stroke="#2C9D72" stroke-width="2" stroke-linejoin="round">
+      <ellipse cx="56" cy="16" rx="5" ry="9"/>
+      <ellipse cx="45" cy="26" rx="5" ry="8.5" transform="rotate(-28 45 26)"/>
+      <ellipse cx="67" cy="28" rx="5" ry="8.5" transform="rotate(28 67 28)"/>
+      <ellipse cx="44" cy="42" rx="4.8" ry="8" transform="rotate(-32 44 42)"/>
+      <ellipse cx="66" cy="44" rx="4.8" ry="8" transform="rotate(32 66 44)"/>
+      <ellipse cx="46" cy="58" rx="4.6" ry="7.5" transform="rotate(-34 46 58)"/>
+      <ellipse cx="63" cy="60" rx="4.6" ry="7.5" transform="rotate(34 63 60)"/>
+    </g>
+  </symbol>
+  <symbol id="bike" viewBox="0 0 120 80">
+    <circle cx="28" cy="54" r="17" fill="none" stroke="#2C9D72" stroke-width="4"/>
+    <circle cx="92" cy="54" r="17" fill="none" stroke="#2C9D72" stroke-width="4"/>
+    <path d="M28 54 L54 54 L66 30 L42 30 M54 54 L72 30 M92 54 L66 30" stroke="#F2E930" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M62 28 L74 28 M38 28 L46 28" stroke="#2C9D72" stroke-width="4" stroke-linecap="round"/>
   </symbol>
   <symbol id="bird" viewBox="0 0 100 80">
     <path d="M8 44 C30 18 58 16 78 30 C86 35 92 30 95 24 C93 44 80 52 60 52 C70 60 78 58 84 54 C76 66 58 70 44 64 C30 70 16 66 8 56 C16 56 22 54 24 50 C16 52 10 50 6 46 Z" fill="#2C9D72"/>
@@ -248,9 +300,14 @@
   <svg class="cloud c1" viewBox="0 0 200 100"><use href="#cloud"/></svg>
   <svg class="cloud c2" viewBox="0 0 200 100"><use href="#cloud"/></svg>
   <svg class="cloud c3" viewBox="0 0 200 100"><use href="#cloud"/></svg>
+  <svg class="cloud c4" viewBox="0 0 200 100"><use href="#cloud"/></svg>
   <svg class="star-bg a" viewBox="0 0 100 100"><use href="#sun"/></svg>
   <svg class="star-bg b" viewBox="0 0 100 100"><use href="#leaf"/></svg>
   <svg class="star-bg c" viewBox="0 0 100 100"><use href="#sun"/></svg>
+  <svg class="star-bg d" viewBox="0 0 100 100"><use href="#rice"/></svg>
+  <svg class="star-bg e" viewBox="0 0 100 100"><use href="#rice"/></svg>
+  <i class="tdot t1"></i><i class="tdot t2"></i><i class="tdot t3"></i><i class="tdot t4"></i><i class="tdot t5"></i>
+  <svg class="bike-deco" viewBox="0 0 120 80"><use href="#bike"/></svg>
 </div>
 <span class="spk p1">✦</span><span class="spk p2">★</span><span class="spk p3">✦</span>
 
@@ -265,11 +322,11 @@
 
   <!-- hero -->
   <section class="hero">
-    <span class="tag">🌾 <span class="eng">2026</span> 池上共居祭 · <span class="eng">NEW</span></span>
+    <span class="tag">🌾 <span class="eng">2026</span> 池上共居祭</span>
     <h1>在池上<br><span class="hl">慢慢工作</span>，好好生活</h1>
     <div class="dates eng">2026 · 09 / 09 ▸ 09 / 12</div>
-    <div class="meta">4 天 3 夜　·　<b>10 人小團</b>　·　稻田旁的共居生活實驗</div>
-    <p class="lede">白天各自工作，午後一起探索池上，晚上吃飯、open mic、桌遊。不用帶專案，也不用交成果，就是一起好好過幾天。</p>
+    <div class="meta">4 天 3 夜　·　<b>10 人小團</b><span class="dot">　·　</span><span class="meta-sub">稻田旁的共居生活實驗</span></div>
+    <p class="lede">白天各自工作，午後一起探索池上，晚上吃飯、open mic、桌遊。不用帶專案，也不用交成果，就是一起好好生活幾天。</p>
     <a class="cta" href="#reg">填寫報名表 ✦</a>
     <div class="seats">名額 <b>10</b> 位　·　審核制　·　額滿即止</div>
     <img class="hero-cat" src="assets/roots-cat.png" alt="騎腳踏車的貓">
@@ -280,30 +337,44 @@
   <!-- 這是什麼 -->
   <div class="sec"><svg class="ic" viewBox="0 0 100 100"><use href="#sun"/></svg><h2>這是一場什麼樣的活動</h2><span class="ln"></span></div>
   <div class="intro-card">
-    說白一點，這不是一堂課，也不是旅行團，是一場 <span class="em">共居生活實驗</span>。白天我們各自工作，旅蒔的空間有咖啡、點心、穩定的網路；午後一起走進池上；晚上一起吃飯、聊聊最近在忙什麼、在卡什麼。沒有人是來當老師的，也不會要你交作業。希望你帶走的，是一段回憶、幾個朋友、一點靈感。
+    這不是一堂課，也不是旅行團，而是一場小小的 <span class="em">共居生活實驗</span>。<br><br>
+    白天，我們在<button class="spot" data-spot="roots">旅蒔</button>各自工作，有咖啡、點心和穩定的網路；午後，一起走進池上的田野、街道與餐桌；晚上，留一點時間給交流、分享和放鬆。<br><br>
+    你不需要準備成果，也不需要成為誰的老師。只要帶著一點好奇心來，和大家一起生活、工作、吃飯、散步。希望你帶走的，是一段回憶、幾個朋友，還有一點重新整理自己的靈感。
+  </div>
+
+  <!-- 適合誰 -->
+  <div class="sec"><svg class="ic" viewBox="0 0 100 100"><use href="#leaf"/></svg><h2>適合誰參加</h2><span class="ln"></span></div>
+  <div class="intro-card">
+    <ul class="suit">
+      <li>自由工作者、遠距工作者，或對數位遊牧好奇的人</li>
+      <li>想試試邊旅行邊工作，也想認識其他數位遊牧者</li>
+      <li>最近想慢下來，重新感受工作和生活的關係</li>
+      <li>想認識一些頻率相近、也在探索生活方式的夥伴</li>
+    </ul>
+    <p style="margin:16px 0 0;font-size:18px;line-height:1.95;">你不需要已經是自由工作者，也不需要任何特別的技能或想法。只要帶著好奇心，願意分享和探索，就很適合來試試看。</p>
   </div>
 
   <!-- 行程 -->
-  <div class="sec"><svg class="ic" viewBox="0 0 100 100"><use href="#leaf"/></svg><h2>四天三夜，大致這樣過</h2><span class="ln"></span></div>
+  <div class="sec"><svg class="ic" viewBox="0 0 100 100"><use href="#rice"/></svg><h2>四天三夜，大致這樣過</h2><span class="ln"></span></div>
   <div class="days">
     <div class="day"><svg class="corner" viewBox="0 0 100 100"><use href="#sun"/></svg>
-      <span class="dnum eng">DAY 1 · 9/9</span><h3>抵達 · 相見歡</h3>
-      <ul><li><span class="tm eng">15:00</span>提早到，慢慢認識夥伴</li><li><span class="tm eng">17:00</span>相見歡 · 自我介紹</li><li><span class="tm eng">18:00</span>池上夜市</li><li class="star"><span class="tm eng">19:30</span>桌遊：如何深刻認識一個人</li></ul>
+      <span class="dnum eng">DAY 1 · 9/9</span><h3>抵達池上，慢慢安頓</h3>
+      <ul><li><span class="tm eng">15:00</span><button class="spot" data-spot="sueimian">穗眠民宿</button> Check-in</li><li><span class="tm eng">17:00</span><button class="spot" data-spot="roots">旅蒔</button>相見歡</li><li><span class="tm eng">18:00</span><button class="spot" data-spot="yeshi">池上夜市</button></li><li class="star"><span class="tm eng">19:30</span><button class="spot" data-spot="boardgame">桌遊之夜</button></li></ul>
     </div>
     <div class="day"><svg class="corner" viewBox="0 0 100 100"><use href="#leaf"/></svg>
-      <span class="dnum eng">DAY 2 · 9/10</span><h3>工作 · 交流</h3>
-      <ul><li><span class="tm eng">08:00</span>瑜伽 / 自由書寫</li><li><span class="tm eng">09:00</span>工作時間</li><li><span class="tm eng">18:00</span>197 風味餐</li><li class="star"><span class="tm eng">19:30</span>open mic</li></ul>
+      <span class="dnum eng">DAY 2 · 9/10</span><h3>白天工作，晚上交流</h3>
+      <ul><li><span class="tm eng">08:00</span>靜心 / 自由書寫</li><li><span class="tm eng">09:00</span><button class="spot" data-spot="roots">旅蒔</button>工作時間</li><li><span class="tm eng">12:00</span>一起午餐</li><li><span class="tm eng">13:00</span><button class="spot" data-spot="roots">旅蒔</button>工作時間</li><li><span class="tm eng">18:00</span><button class="spot" data-spot="y197">197 風味餐</button></li><li class="star"><span class="tm eng">19:30</span><button class="spot" data-spot="openmic1">主題分享 · Open Mic</button></li></ul>
     </div>
     <div class="day"><svg class="corner" viewBox="0 0 100 100"><use href="#sun"/></svg>
-      <span class="dnum eng">DAY 3 · 9/11</span><h3>池上體驗</h3>
-      <ul><li><span class="tm eng">09:00</span>工作時間</li><li><span class="tm eng">14:30</span>金色豐收館 · 爆米香</li><li><span class="tm eng">17:30</span>原住民風味餐</li><li class="star"><span class="tm eng">19:30</span>open mic：自我認識分享</li></ul>
+      <span class="dnum eng">DAY 3 · 9/11</span><h3>走進池上，也整理自己</h3>
+      <ul><li><span class="tm eng">08:00</span>靜心 / 自由書寫</li><li><span class="tm eng">09:00</span><button class="spot" data-spot="roots">旅蒔</button>工作時間</li><li><span class="tm eng">12:00</span>一起午餐</li><li><span class="tm eng">13:00</span><button class="spot" data-spot="roots">旅蒔</button>工作時間</li><li><span class="tm eng">14:30</span><button class="spot" data-spot="harvest">金色豐收館</button> · 爆米香體驗</li><li><span class="tm eng">17:30</span><button class="spot" data-spot="amis">芭洋 Amis 風味餐</button></li><li class="star"><span class="tm eng">19:30</span><button class="spot" data-spot="openmic2">共居回聲 · Open Mic</button></li></ul>
     </div>
     <div class="day"><svg class="corner" viewBox="0 0 100 100"><use href="#leaf"/></svg>
-      <span class="dnum eng">DAY 4 · 9/12</span><h3>騎車 · 賦歸</h3>
-      <ul><li><span class="tm eng">08:00</span>穗眠民宿早餐</li><li><span class="tm eng">09:00</span>騎車</li><li><span class="tm eng">11:00</span>池上三件套</li><li><span class="tm eng">12:00</span>行程結束</li></ul>
+      <span class="dnum eng">DAY 4 · 9/12</span><h3>騎過稻田，慢慢道別</h3>
+      <ul><li><span class="tm eng">08:00</span><button class="spot" data-spot="sueimian">穗眠民宿</button>早餐</li><li><span class="tm eng">09:00</span>騎單車遊稻田</li><li><span class="tm eng">11:00</span><button class="spot" data-spot="dachi">大池豆皮店</button></li><li><span class="tm eng">12:00</span>行程結束</li></ul>
     </div>
   </div>
-  <div class="flex-day">☀️ <b>9/13（日）彈性自由行程</b> — 想多留一天的人，可以一起 🚲</div>
+  <div class="flex-day">☀️ <b>9/13（日）彈性自由行程</b> — 想多留一天的人，可以一起更深度的認識池上</div>
 
   <!-- 費用 -->
   <div class="sec"><svg class="ic" viewBox="0 0 100 100"><use href="#sun"/></svg><h2>費用</h2><span class="ln"></span></div>
@@ -315,10 +386,30 @@
       <div>4 天 3 夜住宿（穗眠民宿）</div>
       <div>旅蒔三天空間使用</div>
       <div>咖啡與點心無限暢飲</div>
-      <div>芭洋 Amis 美饌 · 在地體驗</div>
+      <div>芭洋 Amis 美饌</div>
       <div>穗眠民宿早餐一次</div>
       <div>活動與工作坊安排</div>
     </div>
+  </div>
+
+  <!-- 交通 & 地點 -->
+  <div class="sec"><svg class="ic" viewBox="0 0 100 100"><use href="#leaf"/></svg><h2>交通 & 地點</h2><span class="ln"></span></div>
+  <div class="info-card">
+    <h4>🚆 來程交通建議</h4>
+    <p><b>從台北</b>　台北 → 池上 有直達車，建議搭新自強 3000 的 <b>472 班次</b>。</p>
+    <p><b>從高雄</b>　高雄 → 池上 有直達車，建議搭新自強 3000 的 <b>423 班次</b>。</p>
+    <p><b>從台南</b>　台南 → 池上 沒有直達車，建議搭普悠瑪或新自強 3000，需在台東站轉乘，記得預估好轉乘時間。</p>
+    <h4>📍 地點</h4>
+    <p>活動地點　<a class="ext" href="https://maps.app.goo.gl/SRqSPhd4KmwbPTKw6" target="_blank" rel="noopener">旅蒔共享工作空間（Google 地圖）→</a></p>
+    <p>住宿　<a class="ext" href="https://maps.app.goo.gl/CSFCKEUo5reTNJPS8" target="_blank" rel="noopener">穗眠民宿（Google 地圖）→</a></p>
+  </div>
+
+  <!-- 住宿與空間 -->
+  <div class="sec"><svg class="ic" viewBox="0 0 100 100"><use href="#rice"/></svg><h2>住宿與空間</h2><span class="ln"></span></div>
+  <div class="intro-card">
+    四天三夜住在<button class="spot" data-spot="sueimian">穗眠民宿</button>，距池上車站走路約 10 分鐘、騎腳踏車約 5 分鐘，民宿也有腳踏車可以借。<br><br>
+    民宿有 5 間雙人房，另有一間單人房選項，皆為獨立衛浴。兩人同行可以指定同住夥伴；單人報名的話，主辦方會依性別和報名狀況安排房間（單人房名額有限，視整體報名狀況安排，無法保證一定有）。<br><br>
+    白天的工作與活動空間在<button class="spot" data-spot="roots">旅蒔</button>，一樓是工作區，咖啡和點心無限供應、網路穩定，適合遠距工作。周邊有便利商店、餐廳、超市和咖啡廳；想自己煮的話，旅蒔也可以開伙。
   </div>
 
   <!-- 報名流程 -->
@@ -326,17 +417,32 @@
   <div class="reg">
     <div class="rbanner rbanner" style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;background:var(--y);color:#3c4a00;font-weight:700;font-size:18px;border-radius:50px;padding:11px 24px;margin:0 auto 32px;width:max-content;max-width:100%;box-shadow:0 5px 0 #cdc41f;">🌿 10 人小團 · 審核制 · 想讓每個來的人都能舒服地一起生活幾天</div>
     <div class="steps">
-      <div class="step"><div class="circle eng">1</div><h4>填報名表</h4><p>留下基本資料和你的小故事</p></div>
-      <div class="step"><div class="circle eng">2</div><h4>初步審核</h4><p>主辦方看看是否適合共居</p></div>
-      <div class="step"><div class="circle eng">3</div><h4>線上簡聊</h4><p>15 分鐘，彼此認識一下</p></div>
-      <div class="step"><div class="circle eng">4</div><h4>通知錄取</h4><p>我們會主動和你聯絡</p></div>
-      <div class="step"><div class="circle eng">5</div><h4>付款保留</h4><p>完成付款，正式留位</p></div>
+      <div class="step"><div class="circle eng">1</div><h4>填報名表</h4><p>送出前確認填寫正確，也說說你為什麼想來</p></div>
+      <div class="step"><div class="circle eng">2</div><h4>初步審核</h4><p>確認這次共居是否適合彼此</p></div>
+      <div class="step"><div class="circle eng">3</div><h4>通知錄取</h4><p>我們會主動和你聯絡，確認床位</p></div>
+      <div class="step"><div class="circle eng">4</div><h4>選擇付款方式</h4><p>轉帳或刷卡（刷卡需手續費），帳號報名確認後提供</p></div>
+      <div class="step"><div class="circle eng">5</div><h4>完成報名</h4><p>付款後即完成，記得追蹤我們掌握最新資訊</p></div>
     </div>
     <div class="reg-note">
       <svg class="pin" viewBox="0 0 100 100"><use href="#sun"/></svg>
-      <div>填表不代表錄取，這一點先和你說清楚。簡聊也不是面試，只是想在見面前，先確認彼此的期待是接近的。<br><span style="color:var(--g2);font-weight:700;">怕想太多，就先填個表吧。</span></div>
+      <div>填表不代表錄取，這一點先和你說清楚。審核不是為了篩選誰比較厲害，而是希望這 10 個人能在幾天裡舒服地一起生活。<span style="color:var(--g2);font-weight:700;">別想太多，就先填個表吧。</span></div>
     </div>
     <div class="reg-cta"><a class="cta" href="#">填寫報名表 ✦</a></div>
+  </div>
+
+  <!-- 取消與退款 -->
+  <div class="sec"><svg class="ic" viewBox="0 0 100 100"><use href="#leaf"/></svg><h2>取消與退款</h2><span class="ln"></span></div>
+  <div class="intro-card">
+    錄取並完成付款後，因為住宿與活動名額已經為你保留，恕不接受任意取消退款，這部分要先請你理解。
+    若遇到天災、颱風、交通中斷等不可抗力的情況，主辦方會視實際狀況，和大家另行協調延期或退費的方式。
+  </div>
+
+  <!-- 主辦單位 -->
+  <div class="sec"><svg class="ic" viewBox="0 0 100 100"><use href="#rice"/></svg><h2>主辦單位</h2><span class="ln"></span></div>
+  <div class="intro-card">
+    <a href="https://www.instagram.com/roots_coworking/" target="_blank" rel="noopener" style="color:var(--g-deep);font-weight:700;text-decoration:underline;text-underline-offset:3px;">旅蒔 Roots</a> 是台東池上的一間 coworking space，為旅人、遠距工作者，和想探索地方生活的人，提供一個可以工作、停留、交流的空間。創辦人 Cindy 從紐約的營養師，一路走到池上開店，把這裡變成很多數位遊牧者心中的一個家。<br><br>
+    <a href="https://www.instagram.com/yi.startup.dev/" target="_blank" rel="noopener" style="color:var(--honu);font-weight:700;text-decoration:underline;text-underline-offset:3px;">極簡創業實驗室 Honu Lab</a> 陪專業工作者打造屬於自己的一人顧問公司。但這從來不只是關於創業，而是怎麼把工作和生活，過得更像自己。這次，我們把這場實驗搬到了池上。<br><br>
+    這次我們一起，把各自相信的東西放進同一個地方：一個能好好工作、也能好好生活的池上。
   </div>
 
 </div>
@@ -353,5 +459,43 @@
   <div style="font-size:14px;opacity:.85;margin-top:12px;" class="eng">旅蒔 Roots × Honu Lab　·　台東池上</div>
 </div>
 
+<!-- 景點彈窗 -->
+<div class="modal" id="spotModal">
+  <div class="modal-card">
+    <button class="modal-close" id="spotClose" aria-label="關閉">✕</button>
+    <span class="modal-tag" id="spotTag">📍 池上 · 在地景點</span>
+    <h3 id="spotTitle"></h3>
+    <p id="spotDesc"></p>
+    <a class="modal-link" id="spotLink" target="_blank" rel="noopener">在 Google 地圖上看 →</a>
+    <a class="modal-link modal-ig" id="spotIg" target="_blank" rel="noopener">看 Instagram →</a>
+  </div>
+</div>
+<script>
+const SPOTS = {
+  roots:{tag:"📍 池上 · 主辦場地",title:"旅蒔 Roots Coworking",desc:"池上小鎮裡的 coworking space，也是這次共居季的主場。白天在這裡工作、喝咖啡、交換想法，像是數位遊牧者在池上的一個小基地。",link:"https://maps.app.goo.gl/SRqSPhd4KmwbPTKw6",ig:"https://www.instagram.com/p/DX6f8YciUHR/"},
+  boardgame:{tag:"✦ 共居祭 · 活動",title:"桌遊之夜",desc:"第一晚先不用急著正經自我介紹。用一場桌遊打開話題，在笑聲和小小勝負欲裡，慢慢認識彼此。"},
+  openmic1:{tag:"✦ 共居祭 · 活動",title:"主題分享 · Open Mic",desc:"一個給大家自由分享的夜晚。可以聊工作、旅行、創業、生活方式，也可以帶著一個問題、故事或還沒成形的想法上台。"},
+  openmic2:{tag:"✦ 共居祭 · 活動",title:"共居回聲 · Open Mic",desc:"最後一晚，把這幾天的觀察、感受和收穫說出來。也許是一個新想法，也許只是想記住池上的某個瞬間。"},
+  yeshi:{title:"池上夜市",desc:"不大的夜市，剛好適合第一晚慢慢逛。吃點小吃、走進人群，先用池上的生活節奏替這趟共居開場。",link:"https://maps.app.goo.gl/8H5jQqhE1Z73pv4aA"},
+  y197:{title:"197 風味餐",desc:"以原民風味料理為特色的在地餐廳，常見菜色包含桶烤雞、烤魚、野菜鍋等。這一餐，適合坐下來好好吃，也慢慢認識池上的山野滋味。",link:"https://maps.app.goo.gl/kPfKMsVnMgeQUCLFA"},
+  harvest:{title:"金色豐收館",desc:"在池上鄉農會的金色豐收館，親手體驗用池上米做爆米香。聽見「砰」的一聲，是很有記憶點的在地時刻。",link:"https://maps.app.goo.gl/FyiQs37buzDJDgeXA"},
+  amis:{title:"芭洋 Amis 美饌",desc:"以阿美族飲食文化與在地食材為核心的風味料理。坐下來吃一頓，也透過野菜、香氣與餐桌，靠近這片土地的故事。",link:"https://maps.app.goo.gl/6CHckfxmAeJggXV9A"},
+  sueimian:{tag:"📍 池上 · 住宿",title:"穗眠民宿",desc:"這幾天一起生活的家。離池上車站步行約 10 分鐘，早上吃一頓民宿早餐，再慢慢展開一天的工作與探索。",link:"https://maps.app.goo.gl/CSFCKEUo5reTNJPS8",ig:"https://www.instagram.com/p/DZUcsbYTvif/"},
+  dachi:{title:"大池豆皮店",desc:"池上經典的手工豆皮店。最後一個上午，來份豆皮、豆花和豆漿，讓這趟旅程用簡單又扎實的味道收尾。",link:"https://maps.app.goo.gl/xqzsV9m1xkxxYxQ46"}
+};
+(function(){
+  var m=document.getElementById('spotModal'),t=document.getElementById('spotTitle'),
+      d=document.getElementById('spotDesc'),l=document.getElementById('spotLink'),g=document.getElementById('spotTag'),ig=document.getElementById('spotIg');
+  function openSpot(k){var s=SPOTS[k];if(!s)return;g.textContent=s.tag||'📍 池上 · 在地景點';t.textContent=s.title;d.textContent=s.desc;
+    if(s.link){l.href=s.link;l.style.display='inline-flex';}else{l.style.display='none';}
+    if(s.ig){ig.href=s.ig;ig.style.display='inline-flex';}else{ig.style.display='none';}
+    m.classList.add('open');}
+  function closeSpot(){m.classList.remove('open');}
+  document.querySelectorAll('.spot').forEach(function(b){b.addEventListener('click',function(){openSpot(b.dataset.spot);});});
+  document.getElementById('spotClose').addEventListener('click',closeSpot);
+  m.addEventListener('click',function(e){if(e.target===m)closeSpot();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSpot();});
+})();
+</script>
 </body>
 </html>
