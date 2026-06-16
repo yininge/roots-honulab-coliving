@@ -1133,6 +1133,14 @@
           margin-top: 2px;
         }
       }
+      /* language toggle */
+      .langtoggle{position:fixed;top:14px;right:14px;z-index:50;display:inline-flex;align-items:center;
+        background:#fff;border:2.5px solid var(--g1);border-radius:50px;padding:4px;gap:2px;
+        box-shadow:0 6px 18px rgba(35,110,90,.18);font-family:"Fredoka",sans-serif;font-weight:600;cursor:pointer;}
+      .langtoggle button{border:0;background:none;cursor:pointer;font:inherit;font-size:15px;color:var(--ink-soft);
+        padding:6px 14px;border-radius:50px;transition:background .15s,color .15s;line-height:1;}
+      .langtoggle button.on{background:var(--g2);color:#fff;}
+      @media(max-width:600px){.langtoggle{top:10px;right:10px;}.langtoggle button{padding:6px 12px;font-size:14px;}}
     </style>
   </head>
   <body>
@@ -1332,6 +1340,11 @@
       <svg class="bike-deco" viewBox="0 0 120 80"><use href="#bike" /></svg>
     </div>
 
+    <div class="langtoggle" id="langToggle" role="group" aria-label="Language">
+      <button type="button" data-lang="zh">中</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+
     <div class="wrap">
       <!-- hosts -->
       <div class="hosts">
@@ -1356,29 +1369,29 @@
 
       <!-- hero -->
       <section class="hero">
-        <span class="tag">🌾 <span class="eng">2026</span> 池上共居祭</span>
-        <h1>在池上<br /><span class="hl">慢慢工作</span>，好好生活</h1>
+        <span class="tag" data-i18n="hero.tag">🌾 <span class="eng">2026</span> 池上共居祭</span>
+        <h1 data-i18n="hero.h1">在池上<br /><span class="hl">慢慢工作</span>，好好生活</h1>
         <div class="dates eng">2026 · 09 / 09 ▸ 09 / 12</div>
-        <div class="meta">
+        <div class="meta" data-i18n="hero.meta">
           4 天 3 夜　·　<b>10 人小團</b><span class="dot">　·　</span
           ><span class="meta-sub">稻田旁的共居生活實驗</span>
         </div>
-        <p class="lede">
+        <p class="lede" data-i18n="hero.lede">
           白天各自工作，午後一起探索池上，晚上吃飯、open
           mic、桌遊。不用帶專案，也不用交成果，就是一起好好生活幾天。
         </p>
-        <a class="cta" href="#reg">填寫報名表 ✦</a>
-        <div class="seats">名額 <b>10</b> 位　·　審核制　·　額滿即止</div>
+        <a class="cta" href="#reg" data-i18n="hero.cta">填寫報名表 ✦</a>
+        <div class="seats" data-i18n="hero.seats">名額 <b>10</b> 位　·　審核制　·　額滿即止</div>
         <img class="hero-cat" src="assets/roots-cat.png" alt="騎腳踏車的貓" />
       </section>
 
       <!-- 這是什麼 -->
       <div class="sec">
         <svg class="ic" viewBox="0 0 100 100"><use href="#sun" /></svg>
-        <h2>這是一場什麼樣的活動</h2>
+        <h2 data-i18n="sec.about">這是一場什麼樣的活動</h2>
         <span class="ln"></span>
       </div>
-      <div class="intro-card">
+      <div class="intro-card" data-i18n="card.about">
         這不是一堂課，也不是旅行團，而是一場小小的
         <span class="em">共居生活實驗</span>。<br /><br />
         白天，我們在<button class="spot" data-spot="roots">旅蒔</button
@@ -1389,10 +1402,10 @@
       <!-- 適合誰 -->
       <div class="sec">
         <svg class="ic" viewBox="0 0 100 100"><use href="#leaf" /></svg>
-        <h2>適合誰參加</h2>
+        <h2 data-i18n="sec.who">適合誰參加</h2>
         <span class="ln"></span>
       </div>
-      <div class="intro-card">
+      <div class="intro-card" data-i18n="card.who">
         <ul class="suit">
           <li>自由工作者、遠距工作者，或對數位遊牧好奇的人</li>
           <li>想試試邊旅行邊工作，也想認識其他數位遊牧者</li>
@@ -1407,15 +1420,15 @@
       <!-- 行程 -->
       <div class="sec">
         <svg class="ic" viewBox="0 0 100 100"><use href="#rice" /></svg>
-        <h2>四天三夜，大致這樣過</h2>
+        <h2 data-i18n="sec.schedule">四天三夜，大致這樣過</h2>
         <span class="ln"></span>
       </div>
       <div class="days">
         <div class="day">
           <svg class="corner" viewBox="0 0 100 100"><use href="#sun" /></svg>
           <span class="dnum eng">DAY 1 · 9/9</span>
-          <h3>抵達池上，慢慢安頓</h3>
-          <ul>
+          <h3 data-i18n="day1.title">抵達池上，慢慢安頓</h3>
+          <ul data-i18n="day1.ul">
             <li>
               <span class="tm eng">15:00</span
               ><button class="spot" data-spot="sueimian">穗眠民宿</button>
@@ -1438,8 +1451,8 @@
         <div class="day">
           <svg class="corner" viewBox="0 0 100 100"><use href="#leaf" /></svg>
           <span class="dnum eng">DAY 2 · 9/10</span>
-          <h3>白天工作，晚上交流</h3>
-          <ul>
+          <h3 data-i18n="day2.title">白天工作，晚上交流</h3>
+          <ul data-i18n="day2.ul">
             <li><span class="tm eng">08:00</span>靜心 / 自由書寫</li>
             <li>
               <span class="tm eng">09:00</span
@@ -1463,10 +1476,10 @@
           </ul>
         </div>
         <div class="day">
-          <svg class="corner" viewBox="0 0 100 100"><use href="#sun" /></svg>
+          <svg class="corner" viewBox="0 0 100 100"><use href="#rice" /></svg>
           <span class="dnum eng">DAY 3 · 9/11</span>
-          <h3>走進池上，也整理自己</h3>
-          <ul>
+          <h3 data-i18n="day3.title">走進池上，也整理自己</h3>
+          <ul data-i18n="day3.ul">
             <li><span class="tm eng">08:00</span>靜心 / 自由書寫</li>
             <li>
               <span class="tm eng">09:00</span
@@ -1495,10 +1508,10 @@
           </ul>
         </div>
         <div class="day">
-          <svg class="corner" viewBox="0 0 100 100"><use href="#leaf" /></svg>
+          <svg class="corner" viewBox="0 0 100 100"><use href="#bike" /></svg>
           <span class="dnum eng">DAY 4 · 9/12</span>
-          <h3>騎過稻田，慢慢道別</h3>
-          <ul>
+          <h3 data-i18n="day4.title">騎過稻田，慢慢道別</h3>
+          <ul data-i18n="day4.ul">
             <li>
               <span class="tm eng">08:00</span
               ><button class="spot" data-spot="sueimian">穗眠民宿</button>早餐
@@ -1512,7 +1525,7 @@
           </ul>
         </div>
       </div>
-      <div class="flex-day">
+      <div class="flex-day" data-i18n="flexday">
         ☀️ <b>9/13（日）彈性自由行程</b> —
         想多留一天的人，可以一起更深度的認識池上
       </div>
@@ -1520,14 +1533,14 @@
       <!-- 費用 -->
       <div class="sec">
         <svg class="ic" viewBox="0 0 100 100"><use href="#sun" /></svg>
-        <h2>費用</h2>
+        <h2 data-i18n="sec.price">費用</h2>
         <span class="ln"></span>
       </div>
       <div class="price">
         <svg class="sun" viewBox="0 0 100 100"><use href="#sun" /></svg>
-        <div class="big eng">NT$ 7,777 <small>/ 人</small></div>
-        <div class="two">兩人同行　<b class="eng">NT$ 12,500</b> / 兩人</div>
-        <div class="incl">
+        <div class="big eng">NT$ 7,777 <small data-i18n="price.per">/ 人</small></div>
+        <div class="two" data-i18n="price.two">兩人同行　<b class="eng">NT$ 12,500</b> / 兩人</div>
+        <div class="incl" data-i18n="price.incl">
           <div>4 天 3 夜住宿（穗眠民宿）</div>
           <div>旅蒔三天空間使用</div>
           <div>咖啡與點心無限暢飲</div>
@@ -1540,10 +1553,10 @@
       <!-- 交通 & 地點 -->
       <div class="sec">
         <svg class="ic" viewBox="0 0 100 100"><use href="#leaf" /></svg>
-        <h2>交通 & 地點</h2>
+        <h2 data-i18n="sec.transport">交通 & 地點</h2>
         <span class="ln"></span>
       </div>
-      <div class="info-card">
+      <div class="info-card" data-i18n="card.transport">
         <h4>🚆 來程交通建議</h4>
         <p>
           <b>從台北</b>　台北 → 池上 有直達車，建議搭新自強 3000 的
@@ -1581,10 +1594,10 @@
       <!-- 住宿與空間 -->
       <div class="sec">
         <svg class="ic" viewBox="0 0 100 100"><use href="#rice" /></svg>
-        <h2>住宿與空間</h2>
+        <h2 data-i18n="sec.lodging">住宿與空間</h2>
         <span class="ln"></span>
       </div>
-      <div class="intro-card">
+      <div class="intro-card" data-i18n="card.lodging">
         四天三夜住在<button class="spot" data-spot="sueimian">穗眠民宿</button
         >，距池上車站走路約 10 分鐘、騎腳踏車約 5
         分鐘，民宿也有腳踏車可以借。<br /><br />
@@ -1598,7 +1611,7 @@
       <!-- 報名流程 -->
       <div class="sec" id="reg">
         <svg class="ic" viewBox="0 0 100 100"><use href="#leaf" /></svg>
-        <h2>怎麼報名</h2>
+        <h2 data-i18n="sec.reg">怎麼報名</h2>
         <span class="ln"></span>
       </div>
       <div class="reg">
@@ -1621,10 +1634,11 @@
             max-width: 100%;
             box-shadow: 0 5px 0 #cdc41f;
           "
+          data-i18n="reg.banner"
         >
           🌿 10 人小團 · 審核制 · 想讓每個來的人都能舒服地一起生活幾天
         </div>
-        <div class="steps">
+        <div class="steps" data-i18n="reg.steps">
           <div class="step">
             <div class="circle eng">1</div>
             <h4>填報名表</h4>
@@ -1653,7 +1667,7 @@
         </div>
         <div class="reg-note">
           <svg class="pin" viewBox="0 0 100 100"><use href="#sun" /></svg>
-          <div>
+          <div data-i18n="reg.note">
             填表不代表錄取，這一點先和你說清楚。審核不是為了篩選誰比較厲害，而是希望這
             10 個人能在幾天裡舒服地一起生活。<span
               style="color: var(--g2); font-weight: 700"
@@ -1671,32 +1685,32 @@
             aria-hidden="true"
           />
           <div class="fg">
-            <label class="lbl">姓名 <span class="req">*</span></label>
+            <label class="lbl" data-i18n="f.name">姓名 <span class="req">*</span></label>
             <input type="text" name="name" required />
           </div>
           <div class="fg">
-            <label class="lbl">Email <span class="req">*</span></label>
+            <label class="lbl" data-i18n="f.email">Email <span class="req">*</span></label>
             <input type="email" name="email" required />
-            <p class="hint">錄取通知會寄到這裡</p>
+            <p class="hint" data-i18n="f.email.hint">錄取通知會寄到這裡</p>
           </div>
           <div class="fg">
-            <label class="lbl"
+            <label class="lbl" data-i18n="f.contact"
               >聯絡方式（LINE ID 或手機）<span class="req">*</span></label
             >
             <input type="text" name="contact" required />
           </div>
           <div class="fg">
-            <label class="lbl">性別 <span class="req">*</span></label>
+            <label class="lbl" data-i18n="f.gender">性別 <span class="req">*</span></label>
             <select name="gender" required>
-              <option value="" disabled selected>請選擇</option>
-              <option>女</option>
-              <option>男</option>
-              <option>其他 / 不方便透露</option>
+              <option value="" disabled selected data-i18n="f.gender.o0">請選擇</option>
+              <option value="女" data-i18n="f.gender.female">女</option>
+              <option value="男" data-i18n="f.gender.male">男</option>
+              <option value="其他 / 不方便透露" data-i18n="f.gender.other">其他 / 不方便透露</option>
             </select>
-            <p class="hint">用於安排房間（民宿房型與同住分配）</p>
+            <p class="hint" data-i18n="f.gender.hint">用於安排房間（民宿房型與同住分配）</p>
           </div>
           <div class="fg">
-            <label class="lbl">報名方案 <span class="req">*</span></label>
+            <label class="lbl" data-i18n="f.plan">報名方案 <span class="req">*</span></label>
             <div class="radios">
               <label class="opt"
                 ><input
@@ -1704,24 +1718,24 @@
                   name="plan"
                   value="單人 NT$7,777"
                   required
-                /><span>單人報名 · NT$7,777 / 人</span></label
+                /><span data-i18n="f.plan.solo">單人報名 · NT$7,777 / 人</span></label
               >
               <label class="opt"
                 ><input
                   type="radio"
                   name="plan"
                   value="兩人同行 NT$12,500"
-                /><span>兩人同行 · NT$12,500 / 兩人</span></label
+                /><span data-i18n="f.plan.pair">兩人同行 · NT$12,500 / 兩人</span></label
               >
             </div>
           </div>
           <div class="fg partner-fg">
-            <label class="lbl">同住夥伴姓名</label>
+            <label class="lbl" data-i18n="f.partner">同住夥伴姓名</label>
             <input type="text" name="partner" />
-            <p class="hint">兩人同行才需要填，我們會幫你們安排同住</p>
+            <p class="hint" data-i18n="f.partner.hint">兩人同行才需要填，我們會幫你們安排同住</p>
           </div>
           <div class="fg">
-            <label class="lbl"
+            <label class="lbl" data-i18n="f.background"
               >你現在在做什麼？（工作型態 / 背景）<span class="req"
                 >*</span
               ></label
@@ -1729,45 +1743,46 @@
             <textarea name="background" required></textarea>
           </div>
           <div class="fg">
-            <label class="lbl"
+            <label class="lbl" data-i18n="f.motivation"
               >為什麼想來這次共居？<span class="req">*</span></label
             >
             <textarea name="motivation" required></textarea>
           </div>
           <div class="fg">
-            <label class="lbl">對共居 / 同住有什麼期待或偏好嗎？</label>
+            <label class="lbl" data-i18n="f.expectation">對共居 / 同住有什麼期待或偏好嗎？</label>
             <textarea name="expectation"></textarea>
-            <p class="hint">
+            <p class="hint" data-i18n="f.expectation.hint">
               例如作息、想交流的主題、需要的安靜時間…（可留白）
             </p>
           </div>
           <div class="fg">
-            <label class="lbl">方便線上簡聊（15 分鐘）的時段？</label>
+            <label class="lbl" data-i18n="f.calltime">方便線上簡聊（15 分鐘）的時段？</label>
             <input
               type="text"
               name="calltime"
               placeholder="例如：平日晚上 8 點後、週末下午"
+              data-i18n-ph="f.calltime.ph"
             />
           </div>
           <div class="fg checks">
             <label class="opt"
-              ><input type="checkbox" name="photo" value="是" /><span
+              ><input type="checkbox" name="photo" value="是" /><span data-i18n="f.photo"
                 >我同意活動期間的拍照 / 錄影，可用於後續分享</span
               ></label
             >
             <label class="opt"
-              ><input type="checkbox" name="agree" value="是" required /><span
+              ><input type="checkbox" name="agree" value="是" required /><span data-i18n="f.agree"
                 >我理解這是審核制、填表不代表錄取，也同意主辦方為報名審核與聯絡使用以上個人資料，並理解取消退款規則
                 <span class="req">*</span></span
               ></label
             >
           </div>
           <div class="submit-wrap">
-            <button type="submit" class="submit">送出報名表 ✦</button>
-            <p class="reg-err" id="regErr">
+            <button type="submit" class="submit" data-i18n="f.submit">送出報名表 ✦</button>
+            <p class="reg-err" id="regErr" data-i18n="f.err">
               送出失敗了，請稍後再試，或直接私訊我們的 IG。
             </p>
-            <p class="privacy">
+            <p class="privacy" data-i18n="f.privacy">
               你的資料只用於報名審核與活動聯絡，不會對外提供。本表單受 reCAPTCHA
               保護，適用 Google
               <a
@@ -1785,8 +1800,8 @@
           </div>
         </form>
         <div class="reg-done" id="regDone">
-          <h3>✦ 收到你的報名了！</h3>
-          <p>
+          <h3 data-i18n="done.h3">✦ 收到你的報名了！</h3>
+          <p data-i18n="done.p">
             我們會在初步審核後主動和你聯絡，約一個 15 分鐘的線上簡聊。<br />先謝謝你願意來，九月池上見。
           </p>
         </div>
@@ -1795,10 +1810,10 @@
       <!-- 取消與退款 -->
       <div class="sec">
         <svg class="ic" viewBox="0 0 100 100"><use href="#leaf" /></svg>
-        <h2>取消與退款</h2>
+        <h2 data-i18n="sec.cancel">取消與退款</h2>
         <span class="ln"></span>
       </div>
-      <div class="intro-card">
+      <div class="intro-card" data-i18n="card.cancel">
         錄取並完成付款後，因為住宿與活動名額已經為你保留，恕不接受任意取消退款，這部分要先請你理解。
         若遇到天災、颱風、交通中斷等不可抗力的情況，主辦方會視實際狀況，和大家另行協調延期或退費的方式。
       </div>
@@ -1806,10 +1821,10 @@
       <!-- 主辦單位 -->
       <div class="sec">
         <svg class="ic" viewBox="0 0 100 100"><use href="#rice" /></svg>
-        <h2>主辦單位</h2>
+        <h2 data-i18n="sec.organizer">主辦單位</h2>
         <span class="ln"></span>
       </div>
-      <div class="intro-card">
+      <div class="intro-card" data-i18n="card.organizer">
         <a
           href="https://www.instagram.com/roots_coworking/"
           target="_blank"
@@ -1857,7 +1872,7 @@
         padding: 22px 16px 30px;
       "
     >
-      <div class="signoff" style="color: #fff">
+      <div class="signoff" style="color: #fff" data-i18n="footer.signoff">
         九月，池上見　<span class="eng">· 2026 ·</span>
       </div>
       <div
@@ -1884,7 +1899,7 @@
         >
         <img src="assets/honu-logo.png" alt="Honu Lab" style="height: 32px" />
       </div>
-      <div style="font-size: 14px; opacity: 0.85; margin-top: 12px" class="eng">
+      <div style="font-size: 14px; opacity: 0.85; margin-top: 12px" class="eng" data-i18n="footer.line">
         旅蒔 Roots × Honu Lab　·　台東池上
       </div>
     </div>
@@ -1896,7 +1911,7 @@
         <span class="modal-tag" id="spotTag">📍 池上 · 在地景點</span>
         <h3 id="spotTitle"></h3>
         <p id="spotDesc"></p>
-        <a class="modal-link" id="spotLink" target="_blank" rel="noopener"
+        <a class="modal-link" id="spotLink" target="_blank" rel="noopener" data-i18n="modal.map"
           >在 Google 地圖上看 →</a
         >
         <a
@@ -1904,6 +1919,7 @@
           id="spotIg"
           target="_blank"
           rel="noopener"
+          data-i18n="modal.ig"
           >看 Instagram →</a
         >
       </div>
@@ -1914,6 +1930,9 @@
           tag: "📍 池上 · 主辦場地",
           title: "旅蒔 Roots Coworking",
           desc: "池上小鎮裡的 coworking space，也是這次共居季的主場。白天在這裡工作、喝咖啡、交換想法，像是數位遊牧者在池上的一個小基地。",
+          tagEn: "📍 Chihshang · Host Venue",
+          titleEn: "Roots Coworking",
+          descEn: "Chihshang's coworking space, and the home base for this co-living festival. During the day, we work, drink coffee, and exchange ideas here — a small hub for digital nomads in town.",
           link: "https://maps.app.goo.gl/SRqSPhd4KmwbPTKw6",
           ig: "https://www.instagram.com/p/DX6f8YciUHR/",
         },
@@ -1921,47 +1940,69 @@
           tag: "✦ 共居祭 · 活動",
           title: "桌遊之夜",
           desc: "第一晚先不用急著正經自我介紹。用一場桌遊打開話題，在笑聲裡，慢慢認識彼此。",
+          tagEn: "✦ Festival · Activity",
+          titleEn: "Board Game Night",
+          descEn: "No need to start with formal introductions. A board game is a lighter way to break the ice, laugh a little, and slowly get to know each other.",
         },
         openmic1: {
           tag: "✦ 共居祭 · 活動",
           title: "主題分享 · Open Mic",
           desc: "一個給大家自由分享的夜晚。可以聊工作、旅行、創業、生活方式，也可以帶著一個問題、故事或還沒成形的想法上台。",
+          tagEn: "✦ Festival · Activity",
+          titleEn: "Topic Sharing · Open Mic",
+          descEn: "An evening for open sharing. You can talk about work, travel, building a business, lifestyle, or bring a question, a story, or an idea that is still taking shape.",
         },
         openmic2: {
           tag: "✦ 共居祭 · 活動",
           title: "共居回聲 · Open Mic",
           desc: "最後一晚，把這幾天的觀察、感受和收穫說出來。也許是一個新想法，也許只是想記住池上的某個瞬間。",
+          tagEn: "✦ Festival · Activity",
+          titleEn: "Co-Living Reflections · Open Mic",
+          descEn: "On the last night, we share what we noticed, felt, and took away from these days together — maybe a new idea, maybe just a moment in Chihshang worth remembering.",
         },
         yeshi: {
           title: "池上夜市",
           desc: "不大的夜市，剛好適合第一晚慢慢逛。吃點小吃、走進人群，先用池上的生活節奏替這趟共居開場。",
+          titleEn: "Chihshang Night Market",
+          descEn: "A small night market, just right for a slow first evening. Grab some snacks, walk through the crowd, and ease into the rhythm of Chihshang.",
           link: "https://maps.app.goo.gl/8H5jQqhE1Z73pv4aA",
         },
         y197: {
           title: "197 風味餐",
           desc: "以原民風味料理為特色的在地餐廳，常見菜色包含桶烤雞、烤魚、野菜鍋等。這一餐，適合坐下來好好吃，也慢慢認識池上的山野滋味。",
+          titleEn: "197 Local Cuisine",
+          descEn: "A local restaurant known for Indigenous-style dishes, such as barrel-roasted chicken, grilled fish, and wild-vegetable hotpot. A meal to slow down for, and a way to taste the flavors of the hills.",
           link: "https://maps.app.goo.gl/kPfKMsVnMgeQUCLFA",
         },
         harvest: {
           title: "金色豐收館",
           desc: "在池上鄉農會的金色豐收館，親手體驗用池上米做爆米香。聽見「砰」的一聲，是很有記憶點的在地時刻。",
+          titleEn: "Golden Harvest Hall",
+          descEn: "At the Farmers' Association's Golden Harvest Hall, we will try making puffed rice with Chihshang rice. That loud pop is one of the most memorable parts of the experience.",
           link: "https://maps.app.goo.gl/FyiQs37buzDJDgeXA",
         },
         amis: {
           title: "芭洋 Amis 美饌",
           desc: "以阿美族飲食文化與在地食材為核心的風味料理。坐下來吃一頓，也透過野菜、香氣與餐桌，靠近這片土地的故事。",
+          titleEn: "Bayang Amis Cuisine",
+          descEn: "A meal rooted in Amis food culture and local ingredients. Through wild greens, aromas, and the table, we get a little closer to the story of this land.",
           link: "https://maps.app.goo.gl/6CHckfxmAeJggXV9A",
         },
         sueimian: {
           tag: "📍 池上 · 住宿",
           title: "穗眠民宿",
-          desc: "這幾天一起生活的家。離池上車站步行約 10 分鐘，早上吃一頓民宿早餐，再慢慢展開一天的工作與探索。",
+          desc: "這幾天一起生活的家。離池上車站步行約 10 分鐘，旅蒔不到 1 分鐘。",
+          tagEn: "📍 Chihshang · Stay",
+          titleEn: "Sueimian B&B",
+          descEn: "Our home for these few days. It is about a 10-minute walk from Chihshang Station, with bikes available to borrow for getting around town.",
           link: "https://maps.app.goo.gl/CSFCKEUo5reTNJPS8",
           ig: "https://www.instagram.com/p/DZUcsbYTvif/",
         },
         dachi: {
           title: "大池豆皮店",
           desc: "池上經典的手工豆皮店。最後一個上午，來份豆皮、豆花和豆漿，讓這趟旅程用簡單又扎實的味道收尾。",
+          titleEn: "Dachi Tofu Skin Shop",
+          descEn: "A classic handmade tofu skin shop in Chihshang. On the last morning, we will stop for tofu skin, tofu pudding, and soy milk — a simple, hearty way to close the trip.",
           link: "https://maps.app.goo.gl/xqzsV9m1xkxxYxQ46",
         },
       };
@@ -1975,9 +2016,12 @@
         function openSpot(k) {
           var s = SPOTS[k];
           if (!s) return;
-          g.textContent = s.tag || "📍 池上 · 在地景點";
-          t.textContent = s.title;
-          d.textContent = s.desc;
+          var en = window.__lang === "en";
+          g.textContent =
+            (en ? s.tagEn || s.tag : s.tag) ||
+            (en ? "📍 Chihshang · Local Spot" : "📍 池上 · 在地景點");
+          t.textContent = en ? s.titleEn || s.title : s.title;
+          d.textContent = en ? s.descEn || s.desc : s.desc;
           if (s.link) {
             l.href = s.link;
             l.style.display = "inline-flex";
@@ -1995,10 +2039,10 @@
         function closeSpot() {
           m.classList.remove("open");
         }
-        document.querySelectorAll(".spot").forEach(function (b) {
-          b.addEventListener("click", function () {
-            openSpot(b.dataset.spot);
-          });
+        // 事件委派：language 切換 innerHTML 後 .spot 仍可點
+        document.addEventListener("click", function (e) {
+          var b = e.target.closest && e.target.closest(".spot");
+          if (b && b.dataset.spot) openSpot(b.dataset.spot);
         });
         document
           .getElementById("spotClose")
@@ -2009,6 +2053,118 @@
         document.addEventListener("keydown", function (e) {
           if (e.key === "Escape") closeSpot();
         });
+      })();
+    </script>
+    <script>
+      /* === i18n 中/EN 切換（自動偵測瀏覽器語言 + 記住選擇）=== */
+      (function () {
+        const I18N_EN = {
+          "hero.tag": `🌾 <span class="eng">2026</span> Chihshang Co-Living Festival`,
+          "hero.h1": `In Chihshang,<br /><span class="hl">work at your own pace</span><br />and make room for life`,
+          "hero.meta": `4 days, 3 nights　·　<b>10 people</b><span class="dot">　·　</span><span class="meta-sub">a co-living experiment by the rice fields</span>`,
+          "hero.lede": `Work during the day, explore Chihshang in the afternoon, and gather at night for dinner, Open Mic, and board games.<br /><br />No project to bring. No outcome to prove.<br />Just a few good days of living and working together.`,
+          "hero.cta": `Apply to join ✦`,
+          "hero.seats": `<b>10</b> spots　·　by application　·　until full`,
+          "sec.about": `What this is`,
+          "card.about": `This is not a course. It is not a tour.<br />It is a small <span class="em">experiment in living and working together</span>.<br /><br />During the day, we work from <button class="spot" data-spot="roots">Roots</button>, with coffee, snacks, and steady Wi-Fi. In the afternoon, we head out into Chihshang — the fields, the streets, the food, and the slower rhythm of the town. At night, we leave space to talk, share, and unwind.<br /><br />You do not need to prepare anything. You do not need to teach, pitch, or impress anyone. Just bring a little curiosity, and spend a few days working, eating, walking, and sharing space with others.<br /><br />We hope you leave with a few good memories, a few new friends, and a little more room to breathe.`,
+          "sec.who": `Who it is for`,
+          "card.who": `<ul class="suit"><li>Freelancers, remote workers, or anyone curious about digital nomad life</li><li>People who want to try working while traveling, and meet others doing the same</li><li>Anyone who wants to slow down and rethink the relationship between work and life</li><li>People looking for like-minded company while exploring a different way to live</li></ul><p style="margin: 16px 0 0; font-size: 18px; line-height: 1.95">You do not have to be a full-time freelancer. You do not need a special skill, a big idea, or a finished project. If you are curious, open to sharing, and willing to live alongside others for a few days, you are welcome to apply.</p>`,
+          "sec.schedule": `Four days, three nights — roughly like this`,
+          "day1.title": `Arrive in Chihshang and settle in`,
+          "day1.ul": `<li><span class="tm eng">15:00</span><button class="spot" data-spot="sueimian">Sueimian B&B</button> check-in</li><li><span class="tm eng">17:00</span>Welcome gathering at <button class="spot" data-spot="roots">Roots</button></li><li><span class="tm eng">18:00</span><button class="spot" data-spot="yeshi">Chihshang Night Market</button></li><li class="star"><span class="tm eng">19:30</span><button class="spot" data-spot="boardgame">Board Game Night</button></li>`,
+          "day2.title": `Work by day, gather by night`,
+          "day2.ul": `<li><span class="tm eng">08:00</span>Quiet time / free writing</li><li><span class="tm eng">09:00</span>Work time at <button class="spot" data-spot="roots">Roots</button></li><li><span class="tm eng">12:00</span>Lunch together</li><li><span class="tm eng">13:00</span>Work time at <button class="spot" data-spot="roots">Roots</button></li><li><span class="tm eng">18:00</span><button class="spot" data-spot="y197">197 Local Cuisine</button></li><li class="star"><span class="tm eng">19:30</span><button class="spot" data-spot="openmic1">Topic Sharing · Open Mic</button></li>`,
+          "day3.title": `Step into Chihshang, and back into yourself`,
+          "day3.ul": `<li><span class="tm eng">08:00</span>Quiet time / free writing</li><li><span class="tm eng">09:00</span>Work time at <button class="spot" data-spot="roots">Roots</button></li><li><span class="tm eng">12:00</span>Lunch together</li><li><span class="tm eng">13:00</span>Work time at <button class="spot" data-spot="roots">Roots</button></li><li><span class="tm eng">14:30</span><button class="spot" data-spot="harvest">Golden Harvest Hall</button> · puffed rice experience</li><li><span class="tm eng">17:30</span><button class="spot" data-spot="amis">Bayang Amis Cuisine</button></li><li class="star"><span class="tm eng">19:30</span><button class="spot" data-spot="openmic2">Co-Living Reflections · Open Mic</button></li>`,
+          "day4.title": `One last ride, then goodbye`,
+          "day4.ul": `<li><span class="tm eng">08:00</span>Breakfast at <button class="spot" data-spot="sueimian">Sueimian B&B</button></li><li><span class="tm eng">09:00</span>Bike ride through the rice fields</li><li><span class="tm eng">11:00</span><button class="spot" data-spot="dachi">Dachi Tofu Skin Shop</button></li><li><span class="tm eng">12:00</span>Program ends</li>`,
+          "flexday": `☀️ <b>Sun 9/13 — optional extra day</b> — stay a little longer, and spend one more day getting to know Chihshang more deeply`,
+          "sec.price": `Price`,
+          "price.per": `/ person`,
+          "price.two": `Two together　<b class="eng">NT$ 12,500</b> / pair`,
+          "price.incl": `<div>4 days, 3 nights of lodging at Sueimian B&B</div><div>3 days of workspace access at Roots</div><div>Unlimited coffee and snacks</div><div>One meal at Bayang Amis Cuisine</div><div>One breakfast at Sueimian B&B</div><div>Co-living activities and workshop-style gatherings</div>`,
+          "sec.transport": `Getting there & where`,
+          "card.transport": `<h4>🚆 Getting to Chihshang</h4><p><b>From Taipei</b>　There are direct trains from Taipei to Chihshang. We suggest looking at the New Tze-Chiang 3000, <b>train 472</b>.</p><p><b>From Kaohsiung</b>　There are direct trains from Kaohsiung to Chihshang. We suggest looking at the New Tze-Chiang 3000, <b>train 423</b>.</p><p><b>From Tainan</b>　There is usually no direct train from Tainan to Chihshang. You can take the Puyuma or New Tze-Chiang 3000 and transfer at Taitung Station. Please leave enough time for the transfer.</p><p>Train schedules may change, so please double-check the official Taiwan Railways schedule before booking.</p><h4>📍 Locations</h4><p>Venue　<a class="ext" href="https://maps.app.goo.gl/SRqSPhd4KmwbPTKw6" target="_blank" rel="noopener">Roots Coworking (Google Maps) →</a></p><p>Stay　<a class="ext" href="https://maps.app.goo.gl/CSFCKEUo5reTNJPS8" target="_blank" rel="noopener">Sueimian B&B (Google Maps) →</a></p>`,
+          "sec.lodging": `Where you will stay & work`,
+          "card.lodging": `For these four days, home will be <button class="spot" data-spot="sueimian">Sueimian B&B</button>. It is about a 10-minute walk from Chihshang Station, or about 5 minutes by bike. Bikes are also available to borrow from the B&B.<br /><br />There are five double rooms, plus one single-room option. All rooms have private bathrooms. If you are coming with someone, you can request to room together. If you are joining solo, we will assign rooms based on gender and availability. Single rooms are limited and cannot be guaranteed.<br /><br />During the day, we work and gather at <button class="spot" data-spot="roots">Roots</button>. The first floor is the workspace, with steady Wi-Fi, coffee, and snacks. It is set up for remote work, and there are convenience stores, restaurants, a supermarket, and cafés nearby. If you would rather cook, the kitchen at Roots is also available.`,
+          "sec.reg": `How to join`,
+          "reg.banner": `🌿 10 people · by application · so everyone can settle in and live well together for a few days`,
+          "reg.steps": `<div class="step"><div class="circle eng">1</div><h4>Fill out the application form</h4><p>Tell us a little about yourself and why you want to come</p></div><div class="step"><div class="circle eng">2</div><h4>Initial review</h4><p>We will see whether this co-living experience feels like a good fit, both ways</p></div><div class="step"><div class="circle eng">3</div><h4>Acceptance notice</h4><p>We will reach out to confirm your spot and bed</p></div><div class="step"><div class="circle eng">4</div><h4>Choose a payment method</h4><p>Bank transfer or card; card payments include a processing fee</p></div><div class="step"><div class="circle eng">5</div><h4>Complete registration</h4><p>Your spot is confirmed once payment is complete</p></div>`,
+          "reg.note": `Submitting the form does not guarantee a spot. The review is not about choosing the most impressive people. It is simply our way of making sure this small group of 10 can live together comfortably for a few days. <span style="color: var(--g2); font-weight: 700">Do not overthink it. Just fill out the form.</span>`,
+          "f.name": `Name <span class="req">*</span>`,
+          "f.email": `Email <span class="req">*</span>`,
+          "f.email.hint": `We will send your acceptance notice here`,
+          "f.contact": `How can we reach you? LINE ID or phone number <span class="req">*</span>`,
+          "f.gender": `Gender <span class="req">*</span>`,
+          "f.gender.o0": `Select one`,
+          "f.gender.female": `Female`,
+          "f.gender.male": `Male`,
+          "f.gender.other": `Other / prefer not to say`,
+          "f.gender.hint": `This helps us arrange rooms`,
+          "f.plan": `Plan <span class="req">*</span>`,
+          "f.plan.solo": `Solo · NT$7,777 / person`,
+          "f.plan.pair": `Two together · NT$12,500 / pair`,
+          "f.partner": `Roommate's name`,
+          "f.partner.hint": `Only if you are coming as a pair; we will place you in the same room`,
+          "f.background": `What are you working on these days? Please share a little about your work and background <span class="req">*</span>`,
+          "f.motivation": `Why do you want to join this co-living experience? <span class="req">*</span>`,
+          "f.expectation": `Anything you are hoping for, or any preferences for living together?`,
+          "f.expectation.hint": `For example: your daily rhythm, topics you would love to talk about, quiet time you may need, etc. Optional`,
+          "f.calltime": `When would be a good time for a 15-minute video call?`,
+          "f.calltime.ph": `For example: weekday evenings after 8, or weekend afternoons`,
+          "f.photo": `I am okay with photos and videos from the event being used for future sharing and promotion`,
+          "f.agree": `I understand that spots are by application, submitting this form does not guarantee a spot, the organizers may use my information for review and event communication, and I understand the cancellation and refund policy <span class="req">*</span>`,
+          "f.submit": `Submit ✦`,
+          "f.err": `Something went wrong — please try again in a bit, or DM us on Instagram.`,
+          "f.privacy": `Your information will only be used to review your application and communicate with you about the event. It will not be shared with others. This form is protected by reCAPTCHA, and Google's <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.`,
+          "done.h3": `✦ We got your application!`,
+          "done.p": `After an initial review, we will reach out to schedule a quick 15-minute video call.<br />Thank you for wanting to be part of this — see you in Chihshang in September.`,
+          "sec.cancel": `Cancellations & refunds`,
+          "card.cancel": `Once you are accepted and payment is complete, your room and activity spot will be reserved for you. Because of that, we are not able to offer refunds for changes of plans. Please keep this in mind before confirming your spot.<br /><br />If something beyond anyone's control happens — such as a typhoon, natural disaster, or transportation shutdown — the organizers will work with participants to discuss postponement or refund options based on the situation.`,
+          "sec.organizer": `Who is behind this`,
+          "card.organizer": `<a href="https://www.instagram.com/roots_coworking/" target="_blank" rel="noopener" style="color: var(--g-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 3px;">Roots</a> is a coworking space in Chihshang, Taitung. It is a place for travelers, remote workers, and people curious about small-town life to work, stay, and connect. Founder Cindy went from working as a dietitian in New York to opening this space in Chihshang, and Roots has become a kind of home base for many digital nomads passing through town.<br /><br /><a href="https://www.instagram.com/yi.startup.dev/" target="_blank" rel="noopener" style="color: var(--honu); font-weight: 700; text-decoration: underline; text-underline-offset: 3px;">Honu Lab</a> helps professionals build their own one-person consulting businesses. But at its core, it has never only been about starting a business. It is about building a way of working and living that feels more like yourself. This time, we are bringing that experiment to Chihshang.<br /><br />Together, we are placing what we each believe in one shared space: a Chihshang where you can work well, and live well too.`,
+          "footer.signoff": `See you in Chihshang this September　<span class="eng">· 2026 ·</span>`,
+          "footer.line": `Roots × Honu Lab　·　Chihshang, Taitung`,
+          "modal.map": `Open in Google Maps →`,
+          "modal.ig": `See on Instagram →`,
+        };
+
+        function applyLang(lang) {
+          var en = lang === "en";
+          window.__lang = lang;
+          document.documentElement.lang = en ? "en" : "zh-Hant";
+          try { localStorage.setItem("rootsLang", lang); } catch (e) {}
+          document.querySelectorAll("[data-i18n]").forEach(function (el) {
+            var k = el.getAttribute("data-i18n");
+            if (!el.hasAttribute("data-zh")) el.setAttribute("data-zh", el.innerHTML);
+            if (en) {
+              if (k in I18N_EN) el.innerHTML = I18N_EN[k];
+            } else {
+              el.innerHTML = el.getAttribute("data-zh");
+            }
+          });
+          document.querySelectorAll("[data-i18n-ph]").forEach(function (el) {
+            var k = el.getAttribute("data-i18n-ph");
+            if (!el.hasAttribute("data-zh-ph"))
+              el.setAttribute("data-zh-ph", el.getAttribute("placeholder") || "");
+            el.setAttribute(
+              "placeholder",
+              en && k in I18N_EN ? I18N_EN[k] : el.getAttribute("data-zh-ph"),
+            );
+          });
+          document.querySelectorAll("#langToggle button").forEach(function (b) {
+            b.classList.toggle("on", b.dataset.lang === lang);
+          });
+        }
+
+        document.querySelectorAll("#langToggle button").forEach(function (b) {
+          b.addEventListener("click", function () { applyLang(b.dataset.lang); });
+        });
+
+        var saved = null;
+        try { saved = localStorage.getItem("rootsLang"); } catch (e) {}
+        var initial = saved || (/^zh/i.test(navigator.language || "") ? "zh" : "en");
+        applyLang(initial);
       })();
     </script>
     <script>
