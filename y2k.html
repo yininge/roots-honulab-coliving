@@ -590,8 +590,8 @@ const SPOTS = {
 /* 報名表提交 → Google Sheet（Apps Script Web App）。
    部署後：FORM_ENDPOINT 貼 Web App 網址、RECAPTCHA_SITE_KEY 貼 reCAPTCHA v3 網站金鑰。 */
 (function(){
-  const FORM_ENDPOINT = "PASTE_WEB_APP_URL_HERE";
-  const RECAPTCHA_SITE_KEY = "PASTE_RECAPTCHA_SITE_KEY_HERE";
+  const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbz0BJaOZC2KNiqpNRRNj7aiIvg1T1HMozbrzeHGL1yPKdXUzmyyVA_226EJO91CcYna/exec";
+  const RECAPTCHA_SITE_KEY = "6LdghCEtAAAAAFLqmMFM1qOdDnlqkROcJ1Bd2F1A";
   const SOURCE = "y2k";
   const hasRecaptcha = RECAPTCHA_SITE_KEY.indexOf('PASTE')!==0;
   if(hasRecaptcha){
