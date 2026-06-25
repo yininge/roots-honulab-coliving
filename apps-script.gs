@@ -153,6 +153,39 @@ function sendTestNotice() {
   Logger.log('已嘗試寄測試信到：' + to);
 }
 
+/**
+ * 隔離測試 1：直接寫一列到「報名」分頁（不經過表單、不驗 reCAPTCHA）。
+ * 成功 = 試算表寫入與權限都 OK，問題就在 doPost 的 reCAPTCHA 那關。
+ * 失敗 = 分頁名稱或試算表權限問題，看丟出的錯誤訊息。
+ */
+function testSheetWrite() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('報名');
+  if (!sheet) {
+    throw new Error('找不到名為「報名」的分頁，請確認分頁名稱完全一致');
+  }
+  sheet.appendRow([
+    new Date(), 'testSheetWrite', '', '', '', '', '', '', '', '',
+    '參加', '不參加', '否', 'test', ''
+  ]);
+  Logger.log('✅ 已成功寫入一列到「報名」分頁');
+}
+
+/**
+ * 隔離測試 2：用假資料完整跑一次 doPost（含 reCAPTCHA 那關）。
+ * 看 Logger 印出的回傳：{"ok":true} = 整條路都通；
+ * {"ok":false,"error":"missing token"} 或 "recaptcha failed" = reCAPTCHA 擋住了。
+ */
+function simulateSubmit() {
+  var fake = {
+    name: '測試-simulate', email: 'test@example.com', contact: 'LINE: test',
+    plan: '單人 NT$7,777', partner: '', background: 'bg', motivation: 'mo',
+    expectation: '', calltime: '', dinner197: '參加', tofu: '不參加',
+    photo: true, source: 'simulate', recaptcha: ''
+  };
+  var res = doPost({ postData: { contents: JSON.stringify(fake) } });
+  Logger.log(res.getContent());
+}
+
 /** 公式注入防護：開頭是 = + - @ 的值前綴單引號，讓 Sheet 當純文字 */
 function c(v) {
   v = (v == null) ? '' : String(v);
