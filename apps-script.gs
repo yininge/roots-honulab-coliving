@@ -128,6 +128,31 @@ function notifyOrganizers(d, score) {
   }
 }
 
+/**
+ * 一鍵測試：在編輯器上方函式選單選 sendTestNotice → 執行。
+ * 第一次會跳授權視窗（要按同意，授予寄信權限）；之後會寄一封測試通知信到 NOTIFY_EMAIL。
+ * 收到 = 收件人設定與寄信權限都 OK，問題就只剩「有沒有重新部署新版本」。
+ */
+function sendTestNotice() {
+  var to = PropertiesService.getScriptProperties().getProperty('NOTIFY_EMAIL');
+  if (!to) {
+    throw new Error('NOTIFY_EMAIL 還沒設定：專案設定 → 指令碼屬性 → 新增 NOTIFY_EMAIL');
+  }
+  notifyOrganizers({
+    name: '測試報名',
+    email: 'test@example.com',
+    contact: 'LINE: test',
+    plan: '單人 NT$7,777',
+    dinner197: '參加',
+    tofu: '不參加',
+    background: '（這是 sendTestNotice 寄出的測試信）',
+    motivation: '測試通知信',
+    photo: true,
+    source: 'test'
+  }, '');
+  Logger.log('已嘗試寄測試信到：' + to);
+}
+
 /** 公式注入防護：開頭是 = + - @ 的值前綴單引號，讓 Sheet 當純文字 */
 function c(v) {
   v = (v == null) ? '' : String(v);
