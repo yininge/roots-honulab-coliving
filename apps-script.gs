@@ -22,11 +22,13 @@
  *       - 「網站金鑰 Site Key」（公開）→ 等下貼進 index.html / y2k.html 的 RECAPTCHA_SITE_KEY
  *       - 「祕密金鑰 Secret Key」（不可外流）→ 下一步存進 Script Property，不要貼進任何網頁或 repo
  *
- * C. 貼上腳本 + 設定祕密金鑰
+ * C. 貼上腳本 + 設定祕密金鑰 + 設定通知收件人
  *    1. 在「池上共居祭報名」Sheet：擴充功能 → Apps Script，把本檔整段貼進去，儲存。
  *    2. 左側齒輪「專案設定」→ 指令碼屬性 → 新增屬性：
  *       名稱 RECAPTCHA_SECRET ，值 = 上面的祕密金鑰。存檔。
  *       （祕密金鑰只存在這裡，永遠不進前端、不進 GitHub repo。）
+ *    3. 再新增一個屬性：名稱 NOTIFY_EMAIL ，值 = 報名通知信的收件人。
+ *       可逗號分隔多位（例：cindy@x.com,yi@honulab.com）。沒設定就不寄通知信。
  *
  * D. 部署
  *    1. 部署 → 新增部署 → 類型「網頁應用程式」：執行身分=我、誰可存取=任何人。
@@ -77,9 +79,52 @@ function doPost(e) {
       c(d.calltime), c(d.dinner197), c(d.tofu),
       d.photo ? '是' : '否', c(d.source), score
     ]);
+
+    // 4. 寄送報名通知信給主辦（收件人存在指令碼屬性 NOTIFY_EMAIL）
+    notifyOrganizers(d, score);
+
     return json({ ok: true });
   } catch (err) {
     return json({ ok: false, error: String(err) });
+  }
+}
+
+/**
+ * 報名成功後寄通知信給主辦（Cindy / Yi）。
+ * 收件人存在指令碼屬性 NOTIFY_EMAIL，可逗號分隔多位（例：cindy@x.com,yi@honulab.com）。
+ * 沒設定就略過；寄信失敗也不影響報名寫入。
+ */
+function notifyOrganizers(d, score) {
+  try {
+    var to = PropertiesService.getScriptProperties().getProperty('NOTIFY_EMAIL');
+    if (!to) return; // 沒設定收件人就不寄
+    var name = d.name || '（未填姓名）';
+    var body = [
+      '有人填好報名表了 🎉',
+      '',
+      '姓名：' + (d.name || ''),
+      'Email：' + (d.email || ''),
+      '聯絡方式：' + (d.contact || ''),
+      '方案：' + (d.plan || ''),
+      '同住夥伴：' + (d.partner || ''),
+      '9/10 197 風味餐晚餐：' + (d.dinner197 || ''),
+      '9/13 泥火山豆腐體驗：' + (d.tofu || ''),
+      '',
+      '背景：' + (d.background || ''),
+      '報名動機：' + (d.motivation || ''),
+      '期待 / 偏好：' + (d.expectation || ''),
+      '方便簡聊時段：' + (d.calltime || ''),
+      '拍攝同意：' + (d.photo ? '是' : '否'),
+      '來源頁：' + (d.source || ''),
+      'reCAPTCHA 分數：' + (score === '' ? '（未啟用）' : score),
+      '',
+      '— 完整名單在報名試算表，記得去審核 ✦'
+    ].join('\n');
+    var options = { name: '池上共居祭報名通知' };
+    if (d.email) options.replyTo = d.email; // 直接回信即回給報名者
+    MailApp.sendEmail(to, '新報名：' + name, body, options);
+  } catch (err) {
+    console.error('notify failed: ' + err); // 寄信失敗只記錄，不擋報名
   }
 }
 
