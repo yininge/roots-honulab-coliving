@@ -2325,6 +2325,7 @@
               throw new Error("endpoint not set");
             var data = Object.fromEntries(new FormData(form).entries());
             data.source = SOURCE;
+            data.lang = window.__lang || "zh"; // 給 Apps Script 決定確認信中/英文
             data.recaptcha = await getToken();
             await fetch(FORM_ENDPOINT, {
               method: "POST",

@@ -83,6 +83,9 @@ function doPost(e) {
     // 4. 寄送報名通知信給主辦（收件人存在指令碼屬性 NOTIFY_EMAIL）
     notifyOrganizers(d, score);
 
+    // 5. 寄一封確認信給報名者本人
+    confirmToRegistrant(d);
+
     return json({ ok: true });
   } catch (err) {
     return json({ ok: false, error: String(err) });
@@ -118,13 +121,80 @@ function notifyOrganizers(d, score) {
       '來源頁：' + (d.source || ''),
       'reCAPTCHA 分數：' + (score === '' ? '（未啟用）' : score),
       '',
-      '— 完整名單在報名試算表，記得去審核 ✦'
+      '報名試算表（審核名單）：',
+      SpreadsheetApp.getActiveSpreadsheet().getUrl(),
+      '',
+      '— 記得去看一下並安排簡聊 ✦'
     ].join('\n');
     var options = { name: '池上共居祭報名通知' };
     if (d.email) options.replyTo = d.email; // 直接回信即回給報名者
     MailApp.sendEmail(to, '新報名：' + name, body, options);
   } catch (err) {
     console.error('notify failed: ' + err); // 寄信失敗只記錄，不擋報名
+  }
+}
+
+/**
+ * 寄一封「我們收到你的報名了」確認信給報名者本人。
+ * 依 d.lang（'en' = 英文，其他 = 中文）決定語言；沒有有效 email 就略過。
+ * 寄信失敗不影響報名寫入。
+ */
+function confirmToRegistrant(d) {
+  try {
+    var to = (d.email || '').trim();
+    if (to.indexOf('@') < 1) return; // 沒有像 email 的值就不寄
+    var en = d.lang === 'en';
+    var name = d.name || (en ? 'there' : '你');
+    var replyTo = (PropertiesService.getScriptProperties().getProperty('NOTIFY_EMAIL') || '')
+      .split(',')[0].trim();
+
+    var subject, body;
+    if (en) {
+      subject = "We've received your Chihshang Co-Living application ✦";
+      body = [
+        'Hi ' + name + ',',
+        '',
+        'Thank you for applying to the 2026 Chihshang Co-Living Festival 🌾',
+        "We've received your form.",
+        '',
+        'Spots are by application — after an initial review, we will reach out to schedule a quick 15-minute chat. Thanks for wanting to be part of this. See you in Chihshang in September.',
+        '',
+        'Your selections —',
+        'Plan: ' + (d.plan || ''),
+        '9/10 dinner at 197 Local Cuisine: ' + (d.dinner197 || ''),
+        '9/13 mud-volcano tofu experience: ' + (d.tofu || ''),
+        '',
+        '(If you did not submit this, you can safely ignore this email.)',
+        '',
+        '— Roots × Honu Lab'
+      ].join('\n');
+    } else {
+      subject = '我們收到你的池上共居祭報名了 ✦';
+      body = [
+        '嗨 ' + name + '，',
+        '',
+        '謝謝你報名 2026 池上共居祭 🌾',
+        '我們已經收到你的報名表了。',
+        '',
+        '這是審核制，我們會在初步看過後主動跟你聯絡，約一個 15 分鐘的線上簡聊。先別想太多，謝謝你願意來——九月池上見。',
+        '',
+        '你填的內容 —',
+        '方案：' + (d.plan || ''),
+        '9/10 197 風味餐晚餐：' + (d.dinner197 || ''),
+        '9/13 泥火山豆腐體驗：' + (d.tofu || ''),
+        '',
+        '（如果這不是你本人送出的，可以直接忽略這封信。）',
+        '',
+        '— 旅蒔 Roots × Honu Lab'
+      ].join('\n');
+    }
+    var options = {
+      name: en ? 'Chihshang Co-Living · Roots × Honu Lab' : '池上共居祭 · 旅蒔 Roots × Honu Lab'
+    };
+    if (replyTo) options.replyTo = replyTo; // 報名者回信 → 回到主辦信箱
+    MailApp.sendEmail(to, subject, body, options);
+  } catch (err) {
+    console.error('confirm mail failed: ' + err); // 確認信失敗只記錄，不擋報名
   }
 }
 
