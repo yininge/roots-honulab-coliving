@@ -502,18 +502,20 @@
         padding: 0;
       }
       .day li {
-        display: flex;
-        gap: 11px;
+        position: relative;
+        padding-left: 58px;
         font-size: 17px;
         line-height: 1.6;
         margin-bottom: 9px;
         color: var(--ink);
       }
       .day li .tm {
+        position: absolute;
+        left: 0;
+        top: 0;
         font-family: "Fredoka";
         font-weight: 600;
         color: var(--g2);
-        min-width: 50px;
         font-size: 16px;
       }
       .day li.star .tm {
@@ -521,6 +523,13 @@
       }
       .day li.star {
         font-weight: 700;
+      }
+      /* 行程列：地點/活動按鈕沿文字行內排列、可換行 */
+      .day li .spot {
+        display: inline;
+      }
+      .day li .spot:not(.act) {
+        margin-right: 6px;
       }
       .flex-day {
         margin: 24px auto 0;
@@ -556,6 +565,14 @@
       .spot:hover {
         color: var(--g-deep);
         border-bottom-color: var(--g2);
+      }
+      .spot.act {
+        color: var(--ink);
+        border-bottom-color: rgba(34, 65, 60, 0.35);
+      }
+      .spot.act:hover {
+        color: #000;
+        border-bottom-color: var(--ink);
       }
       .modal {
         position: fixed;
@@ -1436,15 +1453,16 @@
             </li>
             <li>
               <span class="tm eng">17:00</span
-              ><button class="spot" data-spot="roots">旅蒔</button>相見歡
+              ><button class="spot" data-spot="roots">旅蒔</button>破冰遊戲相見歡
             </li>
             <li>
               <span class="tm eng">18:00</span
-              ><button class="spot" data-spot="yeshi">池上夜市</button>
+              ><button class="spot" data-spot="yeshi">池上夜市</button>採買晚餐
             </li>
             <li class="star">
               <span class="tm eng">19:30</span
-              ><button class="spot" data-spot="boardgame">桌遊之夜</button>
+              ><button class="spot" data-spot="roots">旅蒔</button
+              ><button class="spot act" data-spot="boardgame">桌遊之夜</button>
             </li>
           </ul>
         </div>
@@ -1453,23 +1471,27 @@
           <span class="dnum eng">DAY 2 · 9/10</span>
           <h3 data-i18n="day2.title">白天工作，晚上交流</h3>
           <ul data-i18n="day2.ul">
-            <li><span class="tm eng">08:00</span>靜心 / 自由書寫</li>
+            <li>
+              <span class="tm eng">08:00</span
+              ><button class="spot" data-spot="dapo">大坡池</button>靜心 / 自由書寫
+            </li>
             <li>
               <span class="tm eng">09:00</span
               ><button class="spot" data-spot="roots">旅蒔</button>工作時間
             </li>
-            <li><span class="tm eng">12:00</span>一起午餐</li>
+            <li><span class="tm eng">12:00</span>自由午餐時間</li>
             <li>
               <span class="tm eng">13:00</span
               ><button class="spot" data-spot="roots">旅蒔</button>工作時間
             </li>
             <li>
               <span class="tm eng">18:00</span
-              ><button class="spot" data-spot="y197">197 風味餐</button>
+              ><button class="spot" data-spot="y197">197 風味餐</button>自費參加
             </li>
             <li class="star">
               <span class="tm eng">19:30</span
-              ><button class="spot" data-spot="openmic1">
+              ><button class="spot" data-spot="roots">旅蒔</button
+              ><button class="spot act" data-spot="openmic1">
                 主題分享 · Open Mic
               </button>
             </li>
@@ -1480,12 +1502,16 @@
           <span class="dnum eng">DAY 3 · 9/11</span>
           <h3 data-i18n="day3.title">走進池上，也整理自己</h3>
           <ul data-i18n="day3.ul">
-            <li><span class="tm eng">08:00</span>靜心 / 自由書寫</li>
+            <li>
+              <span class="tm eng">08:00</span
+              ><button class="spot" data-spot="sueimian">穗眠民宿</button>靜心 /
+              自由書寫
+            </li>
             <li>
               <span class="tm eng">09:00</span
               ><button class="spot" data-spot="roots">旅蒔</button>工作時間
             </li>
-            <li><span class="tm eng">12:00</span>一起午餐</li>
+            <li><span class="tm eng">12:00</span>自由午餐時間</li>
             <li>
               <span class="tm eng">13:00</span
               ><button class="spot" data-spot="roots">旅蒔</button>工作時間
@@ -1493,15 +1519,16 @@
             <li>
               <span class="tm eng">14:30</span
               ><button class="spot" data-spot="harvest">金色豐收館</button> ·
-              爆米香體驗
+              手作體驗
             </li>
             <li>
               <span class="tm eng">17:30</span
-              ><button class="spot" data-spot="amis">芭洋 Amis 風味餐</button>
+              ><button class="spot" data-spot="amis">芭洋 Amis 美饌</button>道別晚餐
             </li>
             <li class="star">
               <span class="tm eng">19:30</span
-              ><button class="spot" data-spot="openmic2">
+              ><button class="spot" data-spot="roots">旅蒔</button
+              ><button class="spot act" data-spot="openmic2">
                 共居回聲 · Open Mic
               </button>
             </li>
@@ -1514,12 +1541,15 @@
           <ul data-i18n="day4.ul">
             <li>
               <span class="tm eng">08:00</span
-              ><button class="spot" data-spot="sueimian">穗眠民宿</button>早餐
+              ><button class="spot" data-spot="sueimian">穗眠民宿</button>民宿早餐
             </li>
-            <li><span class="tm eng">09:00</span>騎單車遊稻田</li>
+            <li>
+              <span class="tm eng">09:00</span
+              ><button class="spot" data-spot="brown">伯朗大道</button>騎單車遊稻田
+            </li>
             <li>
               <span class="tm eng">11:00</span
-              ><button class="spot" data-spot="dachi">大池豆皮店</button>
+              ><button class="spot" data-spot="dachi">大池豆皮店</button>能量補充
             </li>
             <li><span class="tm eng">12:00</span>行程結束</li>
           </ul>
@@ -1527,7 +1557,7 @@
       </div>
       <div class="flex-day" data-i18n="flexday">
         ☀️ <b>9/13（日）彈性自由行程</b> —
-        想多留一天的人，可以一起更深入地認識池上
+        想多留一天的人，可以一起更深入地認識池上：泥火山豆腐體驗
       </div>
 
       <!-- 費用 -->
@@ -1542,11 +1572,19 @@
         <div class="two" data-i18n="price.two">兩人同行　<b class="eng">NT$ 12,500</b> / 兩人</div>
         <div class="incl" data-i18n="price.incl">
           <div>4 天 3 夜住宿（穗眠民宿）</div>
-          <div>旅蒔三天空間使用</div>
-          <div>民宿大廳咖啡與點心自由取用</div>
-          <div>芭洋 Amis 美饌</div>
+          <div>
+            <a
+              href="https://portaly.cc/rootscoworking/pages/daypass"
+              target="_blank"
+              rel="noopener"
+              style="color: inherit; text-decoration: underline"
+              >旅蒔三日旅人卡</a
+            >
+          </div>
+          <div>民宿變速腳踏車</div>
+          <div>芭洋 Amis 美饌晚餐</div>
           <div>民宿早餐一次</div>
-          <div>活動與工作坊安排</div>
+          <div>迎賓小禮</div>
         </div>
       </div>
 
@@ -1570,7 +1608,15 @@
           <b>從台南</b>　台南 → 池上 沒有直達車，建議搭普悠瑪或新自強
           3000，需在台東站轉乘，記得預估好轉乘時間。
         </p>
-        <p>火車班次可能異動，訂票前請再確認台鐵官方最新時刻表。</p>
+        <p>
+          火車班次可能異動，訂票前請再確認<a
+            class="ext"
+            href="https://www.railway.gov.tw/tra-tip-web/tip"
+            target="_blank"
+            rel="noopener"
+            >台鐵官方最新時刻表 →</a
+          >。
+        </p>
         <h4>📍 地點</h4>
         <p>
           活動地點　<a
@@ -1603,7 +1649,7 @@
         >，距池上車站走路約 10 分鐘、騎腳踏車約 5
         分鐘，民宿也有腳踏車可以借。<br /><br />
         民宿有 5
-        間雙人房，另有一間單人房選項，皆為獨立衛浴。兩人同行可以指定同住夥伴；單人報名的話，主辦方會依報名狀況安排房間（單人房名額有限，視整體報名狀況安排，無法保證一定有）。<br /><br />
+        間雙人房，皆為獨立衛浴。兩人同行可以指定同住夥伴；單人報名的話，主辦方會依報名狀況安排房間。<br /><br />
         白天的工作與活動空間在<button class="spot" data-spot="roots">
           旅蒔</button
         >，一樓是工作區，咖啡和點心無限供應、網路穩定，適合遠距工作。周邊有便利商店、餐廳、超市和咖啡廳；想自己煮的話，旅蒔也可以開伙。
@@ -1755,6 +1801,56 @@
               data-i18n-ph="f.calltime.ph"
             />
           </div>
+          <div class="fg">
+            <label class="lbl" data-i18n="f.dinner197"
+              >是否參加 9/10 197 風味餐晚餐？（約 NT$500 / 人，自費）<span
+                class="req"
+                >*</span
+              ></label
+            >
+            <div class="radios">
+              <label class="opt"
+                ><input
+                  type="radio"
+                  name="dinner197"
+                  value="參加"
+                  required
+                /><span data-i18n="f.dinner197.yes">參加</span></label
+              >
+              <label class="opt"
+                ><input
+                  type="radio"
+                  name="dinner197"
+                  value="不參加"
+                /><span data-i18n="f.dinner197.no">不參加</span></label
+              >
+            </div>
+          </div>
+          <div class="fg">
+            <label class="lbl" data-i18n="f.tofu"
+              >是否參加 9/13 泥火山豆腐體驗？（約 NT$500 / 人，自費）<span
+                class="req"
+                >*</span
+              ></label
+            >
+            <div class="radios">
+              <label class="opt"
+                ><input
+                  type="radio"
+                  name="tofu"
+                  value="參加"
+                  required
+                /><span data-i18n="f.tofu.yes">參加</span></label
+              >
+              <label class="opt"
+                ><input
+                  type="radio"
+                  name="tofu"
+                  value="不參加"
+                /><span data-i18n="f.tofu.no">不參加</span></label
+              >
+            </div>
+          </div>
           <div class="fg checks">
             <label class="opt"
               ><input type="checkbox" name="photo" value="是" /><span data-i18n="f.photo"
@@ -1845,7 +1941,7 @@
           >極簡創業實驗室 Honu Lab</a
         >
         陪專業工作者打造屬於自己的一人顧問公司。但這從來不只是關於創業，而是怎麼把工作和生活，過得更像自己。這次，我們把這場實驗搬到了池上。<br /><br />
-        這次我們一起，把各自相信的東西放進同一個地方：一個能好好工作、也能好好生活的池上。
+        9 月，我們一起，把各自相信的東西放進同一個地方：一個能好好工作、也能好好生活的池上。
       </div>
     </div>
 
@@ -1967,9 +2063,9 @@
         },
         harvest: {
           title: "金色豐收館",
-          desc: "在池上鄉農會的金色豐收館，親手體驗用池上米做爆米香。聽見「砰」的一聲，是很有記憶點的在地時刻。",
+          desc: "池上鄉農會的展館，由舊穀倉改建，展示池上米的故事與在地農產文化。這裡也常有手作體驗，是認識池上稻米日常的好地方。",
           titleEn: "Golden Harvest Hall",
-          descEn: "At the Farmers' Association's Golden Harvest Hall, we will try making puffed rice with Chihshang rice. That loud pop is one of the most memorable parts of the experience.",
+          descEn: "The Chihshang Farmers' Association's exhibition hall, set in a former rice granary. It shares the story of Chihshang rice and local farming culture, and often hosts hands-on experiences — a good place to get to know the town's everyday rice life.",
           link: "https://maps.app.goo.gl/FyiQs37buzDJDgeXA",
         },
         amis: {
@@ -1995,6 +2091,20 @@
           titleEn: "Dachi Tofu Skin Shop",
           descEn: "A classic handmade tofu skin shop in Chihshang. On the last morning, we will stop for tofu skin, tofu pudding, and soy milk — a simple, hearty way to close the trip.",
           link: "https://maps.app.goo.gl/xqzsV9m1xkxxYxQ46",
+        },
+        dapo: {
+          title: "大坡池",
+          desc: "池上小鎮邊的天然濕地湖泊，環湖步道很適合清晨散步。在水光與山色之間靜下心、寫點東西，替一天慢慢開場。",
+          titleEn: "Dapo Pond",
+          descEn: "A natural wetland lake on the edge of town, with a lakeside trail made for early-morning walks. Between the water and the hills, it is a quiet place to settle in and write before the day begins.",
+          link: "https://maps.app.goo.gl/pQxxXBD2uc6cn9x26",
+        },
+        brown: {
+          title: "伯朗大道",
+          desc: "池上最有名的稻田景觀道路，是一條沒有電線桿的筆直田間小路。最後一個上午，騎著單車穿過金黃稻浪，把池上的風景再好好看一次。",
+          titleEn: "Mr. Brown Avenue",
+          descEn: "Chihshang's most famous stretch of rice-field road — a straight farm lane with no power poles in sight. On the last morning, we ride through the golden paddies and take in the scenery one more time.",
+          link: "https://maps.app.goo.gl/FC25KySwryFpaHqPA",
         },
       };
       (function () {
@@ -2062,22 +2172,22 @@
           "card.who": `<ul class="suit"><li>Freelancers, remote workers, or anyone curious about digital nomad life</li><li>People who want to try working while traveling, and meet others doing the same</li><li>Anyone who wants to slow down and rethink the relationship between work and life</li><li>People looking for like-minded company while exploring a different way to live</li></ul><p style="margin: 16px 0 0; font-size: 18px; line-height: 1.95">You do not have to be a full-time freelancer. You do not need a special skill, a big idea, or a finished project. If you are curious, open to sharing, and willing to live alongside others for a few days, you are welcome to apply.</p>`,
           "sec.schedule": `Four days, three nights — roughly like this`,
           "day1.title": `Arrive in Chihshang and settle in`,
-          "day1.ul": `<li><span class="tm eng">15:00</span><button class="spot" data-spot="sueimian">Snooze Inn</button> check-in</li><li><span class="tm eng">17:00</span>Welcome gathering at <button class="spot" data-spot="roots">Roots</button></li><li><span class="tm eng">18:00</span><button class="spot" data-spot="yeshi">Chihshang Night Market</button></li><li class="star"><span class="tm eng">19:30</span><button class="spot" data-spot="boardgame">Board Game Night</button></li>`,
+          "day1.ul": `<li><span class="tm eng">15:00</span><button class="spot" data-spot="sueimian">Snooze Inn</button>· check-in</li><li><span class="tm eng">17:00</span><button class="spot" data-spot="roots">Roots</button>· welcome &amp; ice-breakers</li><li><span class="tm eng">18:00</span><button class="spot" data-spot="yeshi">Chihshang Night Market</button>· dinner run</li><li class="star"><span class="tm eng">19:30</span><button class="spot" data-spot="roots">Roots</button>· <button class="spot act" data-spot="boardgame">Board Game Night</button></li>`,
           "day2.title": `Work by day, gather by night`,
-          "day2.ul": `<li><span class="tm eng">08:00</span>Quiet time / free writing</li><li><span class="tm eng">09:00</span>Work time at <button class="spot" data-spot="roots">Roots</button></li><li><span class="tm eng">12:00</span>Lunch together</li><li><span class="tm eng">13:00</span>Work time at <button class="spot" data-spot="roots">Roots</button></li><li><span class="tm eng">18:00</span><button class="spot" data-spot="y197">197 Local Cuisine</button></li><li class="star"><span class="tm eng">19:30</span><button class="spot" data-spot="openmic1">Topic Sharing · Open Mic</button></li>`,
+          "day2.ul": `<li><span class="tm eng">08:00</span><button class="spot" data-spot="dapo">Dapo Pond</button>· quiet time / free writing</li><li><span class="tm eng">09:00</span><button class="spot" data-spot="roots">Roots</button>· work time</li><li><span class="tm eng">12:00</span>Lunch on your own</li><li><span class="tm eng">13:00</span><button class="spot" data-spot="roots">Roots</button>· work time</li><li><span class="tm eng">18:00</span><button class="spot" data-spot="y197">197 Local Cuisine</button>· optional, paid separately</li><li class="star"><span class="tm eng">19:30</span><button class="spot" data-spot="roots">Roots</button>· <button class="spot act" data-spot="openmic1">Topic Sharing · Open Mic</button></li>`,
           "day3.title": `Step into Chihshang, and back into yourself`,
-          "day3.ul": `<li><span class="tm eng">08:00</span>Quiet time / free writing</li><li><span class="tm eng">09:00</span>Work time at <button class="spot" data-spot="roots">Roots</button></li><li><span class="tm eng">12:00</span>Lunch together</li><li><span class="tm eng">13:00</span>Work time at <button class="spot" data-spot="roots">Roots</button></li><li><span class="tm eng">14:30</span><button class="spot" data-spot="harvest">Golden Harvest Hall</button> · puffed rice making</li><li><span class="tm eng">17:30</span><button class="spot" data-spot="amis">Bayang Amis Cuisine</button></li><li class="star"><span class="tm eng">19:30</span><button class="spot" data-spot="openmic2">Co-Living Reflections · Open Mic</button></li>`,
+          "day3.ul": `<li><span class="tm eng">08:00</span><button class="spot" data-spot="sueimian">Snooze Inn</button>· quiet time / free writing</li><li><span class="tm eng">09:00</span><button class="spot" data-spot="roots">Roots</button>· work time</li><li><span class="tm eng">12:00</span>Lunch on your own</li><li><span class="tm eng">13:00</span><button class="spot" data-spot="roots">Roots</button>· work time</li><li><span class="tm eng">14:30</span><button class="spot" data-spot="harvest">Golden Harvest Hall</button>· hands-on craft</li><li><span class="tm eng">17:30</span><button class="spot" data-spot="amis">Bayang Amis Cuisine</button>· farewell dinner</li><li class="star"><span class="tm eng">19:30</span><button class="spot" data-spot="roots">Roots</button>· <button class="spot act" data-spot="openmic2">Co-Living Reflections · Open Mic</button></li>`,
           "day4.title": `One last ride, then goodbye`,
-          "day4.ul": `<li><span class="tm eng">08:00</span>Breakfast at <button class="spot" data-spot="sueimian">Snooze Inn</button></li><li><span class="tm eng">09:00</span>Bike ride through the rice fields</li><li><span class="tm eng">11:00</span><button class="spot" data-spot="dachi">Dachi Tofu Skin Shop</button></li><li><span class="tm eng">12:00</span>Program ends</li>`,
-          "flexday": `☀️ <b>Sun 9/13 — optional extra day</b> — stay a little longer, and spend one more day getting to know Chihshang more deeply`,
+          "day4.ul": `<li><span class="tm eng">08:00</span><button class="spot" data-spot="sueimian">Snooze Inn</button>· breakfast</li><li><span class="tm eng">09:00</span><button class="spot" data-spot="brown">Mr. Brown Avenue</button>· bike ride through the rice fields</li><li><span class="tm eng">11:00</span><button class="spot" data-spot="dachi">Dachi Tofu Skin Shop</button>· refuel</li><li><span class="tm eng">12:00</span>Program ends</li>`,
+          "flexday": `☀️ <b>Sun 9/13 — optional extra day</b> — stay a little longer, and spend one more day getting to know Chihshang more deeply: mud-volcano tofu making`,
           "sec.price": `Price`,
           "price.per": `/ person`,
           "price.two": `Two together　<b class="eng">NT$ 12,500</b> / pair`,
-          "price.incl": `<div>4 days, 3 nights of lodging at Snooze Inn</div><div>3 days of workspace access at Roots</div><div>Self-serve coffee and snacks in the inn lobby</div><div>One meal at Bayang Amis Cuisine</div><div>One breakfast at the inn</div><div>Co-living activities and workshop-style gatherings</div>`,
+          "price.incl": `<div>4 days, 3 nights of lodging at Snooze Inn</div><div><a href="https://portaly.cc/rootscoworking/pages/daypass" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Roots 3-day traveler pass</a></div><div>Geared bicycle from the inn</div><div>Dinner at Bayang Amis Cuisine</div><div>One breakfast at the inn</div><div>A welcome gift</div>`,
           "sec.transport": `Getting there & where to find us`,
-          "card.transport": `<h4>🚆 Getting to Chihshang</h4><p><b>From Taipei</b>　There are direct trains from Taipei to Chihshang. We recommend the New Tze-Chiang 3000 (<b>train 472</b>).</p><p><b>From Kaohsiung</b>　There are direct trains from Kaohsiung to Chihshang. We recommend the New Tze-Chiang 3000 (<b>train 423</b>).</p><p><b>From Tainan</b>　There is usually no direct train from Tainan to Chihshang. You can take the Puyuma or New Tze-Chiang 3000 and transfer at Taitung Station. Please leave enough time for the transfer.</p><p>Train schedules may change, so please double-check the official Taiwan Railways schedule before booking.</p><h4>📍 Locations</h4><p>Venue　<a class="ext" href="https://maps.app.goo.gl/SRqSPhd4KmwbPTKw6" target="_blank" rel="noopener">Roots Coworking (Google Maps) →</a></p><p>Stay　<a class="ext" href="https://maps.app.goo.gl/CSFCKEUo5reTNJPS8" target="_blank" rel="noopener">Snooze Inn (Google Maps) →</a></p>`,
+          "card.transport": `<h4>🚆 Getting to Chihshang</h4><p><b>From Taipei</b>　There are direct trains from Taipei to Chihshang. We recommend the New Tze-Chiang 3000 (<b>train 472</b>).</p><p><b>From Kaohsiung</b>　There are direct trains from Kaohsiung to Chihshang. We recommend the New Tze-Chiang 3000 (<b>train 423</b>).</p><p><b>From Tainan</b>　There is usually no direct train from Tainan to Chihshang. You can take the Puyuma or New Tze-Chiang 3000 and transfer at Taitung Station. Please leave enough time for the transfer.</p><p>Train schedules may change, so please double-check the <a class="ext" href="https://www.railway.gov.tw/tra-tip-web/tip" target="_blank" rel="noopener">official Taiwan Railways schedule →</a> before booking.</p><h4>📍 Locations</h4><p>Venue　<a class="ext" href="https://maps.app.goo.gl/SRqSPhd4KmwbPTKw6" target="_blank" rel="noopener">Roots Coworking (Google Maps) →</a></p><p>Stay　<a class="ext" href="https://maps.app.goo.gl/CSFCKEUo5reTNJPS8" target="_blank" rel="noopener">Snooze Inn (Google Maps) →</a></p>`,
           "sec.lodging": `Where you will stay & work`,
-          "card.lodging": `For these four days, home will be <button class="spot" data-spot="sueimian">Snooze Inn</button>. It is about a 10-minute walk from Chihshang Station, or about 5 minutes by bike. Bikes are also available to borrow from the inn.<br /><br />There are five double rooms, plus one single-room option. All rooms have private bathrooms. If you are coming with someone, you can request to room together. If you are joining solo, we will assign rooms based on availability. Single rooms are limited and cannot be guaranteed.<br /><br />During the day, we work and gather at <button class="spot" data-spot="roots">Roots</button>. The first floor is the workspace, with steady Wi-Fi, coffee, and snacks. It is set up for remote work, and there are convenience stores, restaurants, a supermarket, and cafés nearby. If you would rather cook, the kitchen at Roots is also available.`,
+          "card.lodging": `For these four days, home will be <button class="spot" data-spot="sueimian">Snooze Inn</button>. It is about a 10-minute walk from Chihshang Station, or about 5 minutes by bike. Bikes are also available to borrow from the inn.<br /><br />There are five double rooms, all with private bathrooms. If you are coming with someone, you can request to room together. If you are joining solo, we will assign rooms based on how registrations come in.<br /><br />During the day, we work and gather at <button class="spot" data-spot="roots">Roots</button>. The first floor is the workspace, with steady Wi-Fi, coffee, and snacks. It is set up for remote work, and there are convenience stores, restaurants, a supermarket, and cafés nearby. If you would rather cook, the kitchen at Roots is also available.`,
           "sec.reg": `How to join`,
           "reg.banner": `🌿 10 people · by application · so everyone can settle in and live well together for a few days`,
           "reg.steps": `<div class="step"><div class="circle eng">1</div><h4>Fill out the application form</h4><p>Tell us a little about yourself and why you want to come</p></div><div class="step"><div class="circle eng">2</div><h4>Initial review</h4><p>We will see whether this co-living experience feels like a good fit, both ways</p></div><div class="step"><div class="circle eng">3</div><h4>Acceptance notice</h4><p>We will reach out to confirm your spot and bed</p></div><div class="step"><div class="circle eng">4</div><h4>Choose a payment method</h4><p>Bank transfer or card; card payments include a processing fee. Account details are sent once your spot is confirmed</p></div><div class="step"><div class="circle eng">5</div><h4>Complete registration</h4><p>Your spot is confirmed once payment is complete — follow us to stay in the loop</p></div>`,
@@ -2095,19 +2205,25 @@
           "f.motivation": `Why do you want to join this co-living experience? <span class="req">*</span>`,
           "f.expectation": `Anything you are hoping for, or any preferences for living together?`,
           "f.expectation.hint": `For example: your daily rhythm, topics you would love to talk about, quiet time you may need, etc. Optional`,
-          "f.calltime": `When would be a good time for a 15-minute video call?`,
+          "f.calltime": `When would be a good time for a quick 15-minute chat?`,
           "f.calltime.ph": `For example: weekday evenings after 8, or weekend afternoons`,
+          "f.dinner197": `Will you join the 9/10 dinner at 197 Local Cuisine? (about NT$500 / person, paid separately)<span class="req">*</span>`,
+          "f.dinner197.yes": `Joining`,
+          "f.dinner197.no": `Not joining`,
+          "f.tofu": `Will you join the 9/13 mud-volcano tofu experience? (about NT$500 / person, paid separately)<span class="req">*</span>`,
+          "f.tofu.yes": `Joining`,
+          "f.tofu.no": `Not joining`,
           "f.photo": `I am okay with photos and videos from the event being used for future sharing and promotion`,
           "f.agree": `I understand that spots are by application, submitting this form does not guarantee a spot, the organizers may use my information for review and event communication, and I understand the cancellation and refund policy <span class="req">*</span>`,
           "f.submit": `Submit ✦`,
           "f.err": `Something went wrong — please try again in a bit, or DM us on Instagram.`,
           "f.privacy": `Your information will only be used to review your application and communicate with you about the event. It will not be shared with others. This form is protected by reCAPTCHA, and Google's <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.`,
           "done.h3": `✦ We got your application!`,
-          "done.p": `After an initial review, we will reach out to schedule a quick 15-minute video call.<br />Thank you for wanting to be part of this — see you in Chihshang in September.`,
+          "done.p": `After an initial review, we will reach out to schedule a quick 15-minute chat.<br />Thank you for wanting to be part of this — see you in Chihshang in September.`,
           "sec.cancel": `Cancellations & refunds`,
           "card.cancel": `Once you are accepted and payment is complete, your room and activity spot will be reserved for you. Because of that, we are not able to offer refunds if your plans change. Please keep this in mind before confirming your spot.<br /><br />If something beyond anyone's control happens — such as a typhoon, natural disaster, or transportation shutdown — the organizers will work with participants to discuss postponement or refund options based on the situation.<br /><br />※ The organizers reserve the right to modify, adjust, or cancel the event, and to make the final call on anything related to it. Any changes will be announced through the organizers' social channels.`,
           "sec.organizer": `Who is behind this`,
-          "card.organizer": `<a href="https://www.instagram.com/roots_coworking/" target="_blank" rel="noopener" style="color: var(--g-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 3px;">Roots</a> is a coworking space in Chihshang, Taitung. It is a place for travelers, remote workers, and people curious about small-town life to work, stay, and connect. Founder Cindy went from working as a dietitian in New York to opening this space in Chihshang, and Roots has become a kind of home base for many digital nomads passing through town.<br /><br /><a href="https://www.instagram.com/yi.startup.dev/" target="_blank" rel="noopener" style="color: var(--honu); font-weight: 700; text-decoration: underline; text-underline-offset: 3px;">Honu Lab</a> helps professionals build their own one-person consulting businesses. But at its core, it has never only been about starting a business. It is about building a way of working and living that feels more like yourself. This time, we are bringing that experiment to Chihshang.<br /><br />This time, we are bringing what each of us believes into one place: a Chihshang where you can work well, and live well too.`,
+          "card.organizer": `<a href="https://www.instagram.com/roots_coworking/" target="_blank" rel="noopener" style="color: var(--g-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 3px;">Roots</a> is a coworking space in Chihshang, Taitung. It is a place for travelers, remote workers, and people curious about small-town life to work, stay, and connect. Founder Cindy went from working as a dietitian in New York to opening this space in Chihshang, and Roots has become a kind of home base for many digital nomads passing through town.<br /><br /><a href="https://www.instagram.com/yi.startup.dev/" target="_blank" rel="noopener" style="color: var(--honu); font-weight: 700; text-decoration: underline; text-underline-offset: 3px;">Honu Lab</a> helps professionals build their own one-person consulting businesses. But at its core, it has never only been about starting a business. It is about building a way of working and living that feels more like yourself. This time, we are bringing that experiment to Chihshang.<br /><br />This September, we are bringing what each of us believes into one place: a Chihshang where you can work well, and live well too.`,
           "footer.signoff": `See you in Chihshang this September　<span class="eng">· 2026 ·</span>`,
           "footer.line": `Roots × Honu Lab　·　Chihshang, Taitung`,
           "modal.map": `Open in Google Maps →`,
